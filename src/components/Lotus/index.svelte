@@ -3,7 +3,7 @@
   import LotusStaking from './LotusStaking.svelte'
   import MyStakingList from './MyStakingList.svelte'
   import Statement from './Statement.svelte'
-  import AllStakingList from './AllStakingList.svelte'
+  // import AllStakingList from './AllStakingList.svelte'
   import SaleGraph from '@/components/Mint/SaleGraph.svelte'
   import { isConnect, myAddressShort, CNDV2Contract } from '@/stores'
   import { onMount } from 'svelte'
@@ -68,9 +68,9 @@
       </div>
     {/if}
 
-    <div class="sub-big-frame">
+    <!-- <div class="sub-big-frame">
       <AllStakingList />
-    </div>
+    </div> -->
   </div>
 </div>
 

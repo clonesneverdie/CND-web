@@ -8,13 +8,16 @@
   const provider = new ethers.providers.JsonRpcProvider($publicPolygonRPC)
   let clones: any = '-'
   let totalNectar: any = '-'
-  let ownersLength: any = '-'
+  let ownersLength: any = 0
   let clonePerBlockNectars: any = '-'
 
+  let ownersList = []
+
   onMount(() => {
-    axios.get('https://api.clonesneverdie.com/lotus/owners').then(response => {
-      ownersLength = response.data.owners
-    })
+    // axios.get('https://api.clonesneverdie.com/lotus/owners').then(response => {
+    //   ownersLength = response.data.owners
+    // })
+    getOwners()
     getTotalNectar()
     lotusStatement()
   })
@@ -25,21 +28,21 @@
     let _totalNectar = (currentPolygonBlock - lotusGenesisBlock) * 10
     totalNectar = convert(_totalNectar)
   }
-  // async function getOwners() {
-  //   const contract = new ethers.Contract($LotusContract, LotusABI, provider)
-  //   const lotusCount = await contract.lotusCount()
-  //   for (let i = 1; i < lotusCount; i++) {
-  //     let arr = await contract.lotuses(i)
-  //     if (arr[0] === '0x0000000000000000000000000000000000000000') {
-  //       continue
-  //     }
-  //     if (!ownersList.includes(arr[0])) {
-  //       ownersLength += 1
-  //       ownersList.push(arr[0])
-  //     }
-  //   }
-  //   ownersLength = ownersLength
-  // }
+  async function getOwners() {
+    const contract = new ethers.Contract($LotusContract, LotusABI, provider)
+    const lotusCount = await contract.lotusCount()
+    for (let i = 1; i < lotusCount; i++) {
+      let arr = await contract.lotuses(i)
+      if (arr[0] === '0x0000000000000000000000000000000000000000') {
+        continue
+      }
+      if (!ownersList.includes(arr[0])) {
+        ownersLength += 1
+        ownersList.push(arr[0])
+      }
+    }
+    ownersLength = ownersLength
+  }
   async function lotusStatement() {
     const contract = new ethers.Contract($LotusContract, LotusABI, provider)
     const totalPower = await contract.totalPower()
