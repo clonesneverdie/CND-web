@@ -1,0 +1,12 @@
+/node_modules/
+/public/build/
+
+.DS_Store
+.env
+
+node_modules
+
+#Hardhat files
+cache
+artifacts
+package-lock.json
