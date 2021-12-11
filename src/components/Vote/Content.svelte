@@ -157,7 +157,9 @@
   </div>
 </div>
 
-<Vote pageId="{pageId}" />
+{#if voteData.result === 0}
+  <Vote pageId="{pageId}" />
+{/if}
 
 <style lang="scss">
   .container {

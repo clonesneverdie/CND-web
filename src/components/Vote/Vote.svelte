@@ -1,6 +1,5 @@
 <script>
   export let pageId
-  import { onMount, beforeUpdate } from 'svelte'
   import { myCNDV2List, VoteContract, signer, walletLoading, isConnect } from '@/stores'
   import { ethers } from 'ethers'
   import { RingLoader } from 'svelte-loading-spinners'
