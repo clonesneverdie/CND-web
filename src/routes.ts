@@ -8,20 +8,23 @@ import About from './pages/About/index.svelte'
 import Vote from './pages/Vote/index.svelte'
 import VoteContent from './pages/Vote/Content.svelte'
 import Pax from './pages/Pax/index.svelte'
+import V2Mining from './components/Pax/V2Mining.svelte'
 
 import NotFound from './pages/NotFound/index.svelte'
 
 export default {
   '/': Home,
   '/wallet': Wallet,
-  '/pax': Pax,
-  '/lotus': Lotus,
   '/mint': Mint,
   '/comics': Toon,
   '/comics/:id': ToonContent,
   '/vote': Vote,
   '/vote/:id': VoteContent,
   '/about': About,
+  '/pax': Pax,
+  '/pax/lotus': Lotus,
+  '/pax/v2': V2Mining,
+
   // Catch-all, must be last
   '*': NotFound,
 }

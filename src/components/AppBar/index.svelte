@@ -20,13 +20,12 @@
   </div>
 
   <ul class="{toggleBtnActive === false ? 'navbar_menu' : 'navbar_menu_active'}">
-    <li><a href="/#/mint" on:click="{clickedToggleBtn}">Mint</a></li>
-    <li><a href="/#/wallet" on:click="{clickedToggleBtn}">Wallet</a></li>
-    <li><a href="/#/vote" on:click="{clickedToggleBtn}">Vote</a></li>
-    <li><a href="/#/pax" on:click="{clickedToggleBtn}">Pax</a></li>
-    <li><a href="/#/lotus" on:click="{clickedToggleBtn}">Lotus</a></li>
-    <li><a href="/#/comics" on:click="{clickedToggleBtn}">Comics</a></li>
-    <li><a href="/#/about" on:click="{clickedToggleBtn}">About</a></li>
+    <li><a href="/#/mint" on:click="{clickedToggleBtn}">MINT</a></li>
+    <li><a href="/#/wallet" on:click="{clickedToggleBtn}">WALLET</a></li>
+    <li><a href="/#/vote" on:click="{clickedToggleBtn}">VOTE</a></li>
+    <li><a href="/#/pax" on:click="{clickedToggleBtn}">$PAX</a></li>
+    <li><a href="/#/comics" on:click="{clickedToggleBtn}">COMICS</a></li>
+    <li><a href="/#/about" on:click="{clickedToggleBtn}">ABOUT</a></li>
   </ul>
 
   <ul class="{toggleBtnActive === false ? 'navbar_icons' : 'navbar_icons_active'}">

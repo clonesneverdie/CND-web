@@ -14,6 +14,7 @@
   let totalSupply: number
 
   onMount(() => {
+    window.scrollTo(0, 0);
     getTotalSupply()
   })
 
