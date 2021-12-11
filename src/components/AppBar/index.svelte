@@ -1,9 +1,7 @@
 <script lang="ts">
-  import * as animateScroll from 'svelte-scrollto'
   import Fa from 'svelte-fa'
   import { faTwitter, faDiscord, faMedium, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons'
   import { faBars } from '@fortawesome/free-solid-svg-icons'
-  import { push } from 'svelte-spa-router'
 
   let navbarMenu = 'navbar_menu'
   let navbarIcons = 'navbar_icons'
@@ -12,12 +10,6 @@
   function clickedToggleBtn() {
     toggleBtnActive = !toggleBtnActive
   }
-
-  // function toMint() {
-  //   push('/')
-  //   animateScroll.scrollTo({ element: '#mint' })
-  //   clickedToggleBtn()
-  // }
 </script>
 
 <nav class="navbar">
@@ -31,6 +23,7 @@
     <li><a href="/#/mint" on:click="{clickedToggleBtn}">Mint</a></li>
     <li><a href="/#/wallet" on:click="{clickedToggleBtn}">Wallet</a></li>
     <li><a href="/#/vote" on:click="{clickedToggleBtn}">Vote</a></li>
+    <li><a href="/#/pax" on:click="{clickedToggleBtn}">Pax</a></li>
     <li><a href="/#/lotus" on:click="{clickedToggleBtn}">Lotus</a></li>
     <li><a href="/#/comics" on:click="{clickedToggleBtn}">Comics</a></li>
     <li><a href="/#/about" on:click="{clickedToggleBtn}">About</a></li>

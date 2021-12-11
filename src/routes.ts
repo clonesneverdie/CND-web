@@ -7,12 +7,14 @@ import ToonContent from './pages/Toon/Content.svelte'
 import About from './pages/About/index.svelte'
 import Vote from './pages/Vote/index.svelte'
 import VoteContent from './pages/Vote/Content.svelte'
+import Pax from './pages/Pax/index.svelte'
 
 import NotFound from './pages/NotFound/index.svelte'
 
 export default {
   '/': Home,
   '/wallet': Wallet,
+  '/pax': Pax,
   '/lotus': Lotus,
   '/mint': Mint,
   '/comics': Toon,
