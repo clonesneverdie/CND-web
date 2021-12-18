@@ -1,4 +1,36 @@
-<script lang="ts">
+<script>
+  import PConnect from '@/components/PolygonConnect/index.svelte'
+  import { RingLoader } from 'svelte-loading-spinners'
+  import { isConnect, myCNDV2List, walletLoading } from '@/stores'
+  import { onMount } from 'svelte'
+
+  let checkedIds = []
+  let loading = true
+
+  onMount(() => {
+    window.scrollTo(0, 0)
+  })
+
+  function cheked(num) {
+    if (checkedIds.includes(num)) {
+      let filteredId = checkedIds.filter(ids => {
+        return ids !== num
+      })
+      checkedIds = filteredId
+    } else {
+      checkedIds.push(num)
+      checkedIds = checkedIds
+    }
+  }
+
+  function selectAll() {
+    checkedIds = $myCNDV2List
+  }
+
+  function selectNone() {
+    let data = []
+    checkedIds = data
+  }
 </script>
 
 <div class="container">
@@ -14,7 +46,47 @@
     <div class="box-wrap">
       <div class="box">
         <div class="box-content">
-
+          <div class="total-value">Total Pax: 30 $PAX</div>
+          <div class="select-all-btn">
+            <div class="text-btn" on:click="{selectAll}">- Select All</div>
+            <div class="text-btn" on:click="{selectNone}">- Unselect All</div>
+          </div>
+          <div class="list-head">
+            <div class="item-number">Select</div>
+            <div class="item-name">Clone ID</div>
+            <div class="item-id">$PAX</div>
+          </div>
+          <div class="list-content-wrap">
+            {#if $walletLoading === false || loading === false}
+              <div class="loading">
+                <RingLoader size="60" color="#FF7F00" unit="px" duration="1s" />
+              </div>
+            {/if}
+            {#each $myCNDV2List as item}
+              <div class="list-content">
+                {#if checkedIds.includes(item) === true}
+                  <div class="checked" value="{item}" on:click="{() => cheked(item)}"></div>
+                {:else}
+                  <div class="check" value="{item}" on:click="{() => cheked(item)}"></div>
+                {/if}
+                <div class="item-name">#{item}</div>
+                <div class="item-id">{item}</div>
+              </div>
+            {/each}
+          </div>
+          {#if $isConnect && checkedIds.length > 0}
+            <div class="claim-btn">
+              <b>Claim</b>
+            </div>
+          {:else if $isConnect && checkedIds.length === 0}
+            <div class="claim-btn-non">
+              <b>Claim</b>
+            </div>
+          {:else}
+            <div class="connectBtn">
+              <PConnect />
+            </div>
+          {/if}
         </div>
       </div>
     </div>
@@ -60,9 +132,111 @@
     flex-wrap: wrap;
   }
 
+  .total-value {
+    font-size: 1.8rem;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .list-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .list-content-wrap {
+    height: 300px;
+    overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+
+  .list-content-wrap::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+
+  .list-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+
+  .connectBtn {
+    width: 100%;
+    background-color: $highlight-color;
+    font-size: 20px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .connectBtn:active {
+    opacity: 0.7;
+  }
+
+  .claim-btn {
+    width: 100%;
+    background-color: $highlight-color;
+    font-size: 20px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .claim-btn:active {
+    opacity: 0.7;
+  }
+
+  .claim-btn-non {
+    width: 100%;
+    background-color: lightgray;
+    font-size: 20px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .check {
+    width: 15px;
+    height: 15px;
+    background-color: lightgray;
+    cursor: pointer;
+  }
+  .checked {
+    width: 15px;
+    height: 15px;
+    background-color: $highlight-color;
+    cursor: pointer;
+  }
+  .select-all-btn {
+    display: flex;
+    margin-bottom: 30px;
+  }
+  .text-btn {
+    color: $highlight-color;
+    font-size: 1.1rem;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
   @media screen and (max-width: 768px) {
     .container-paragraph {
       align-items: center;
+      width: 100%;
+    }
+
+    .box-wrap {
       width: 100%;
     }
   }
