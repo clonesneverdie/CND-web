@@ -199,6 +199,10 @@
     margin-bottom: 20px;
   }
 
+  .clone-list-wrap::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+
   .clone-list {
     width: 100%;
     display: flex;
