@@ -9,6 +9,8 @@ import Vote from './pages/Vote/index.svelte'
 import VoteContent from './pages/Vote/Content.svelte'
 import Pax from './pages/Pax/index.svelte'
 import V2Mining from './components/Pax/V2Mining.svelte'
+import QuickswapPool from './components/Pax/QuickswapPool.svelte'
+import Whitehole from './components/Pax/Whitehole.svelte'
 
 import NotFound from './pages/NotFound/index.svelte'
 
@@ -24,6 +26,8 @@ export default {
   '/pax': Pax,
   '/pax/lotus': Lotus,
   '/pax/v2': V2Mining,
+  '/pax/quickswap': QuickswapPool,
+  '/pax/whitehole': Whitehole,
 
   // Catch-all, must be last
   '*': NotFound,

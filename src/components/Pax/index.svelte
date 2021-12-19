@@ -21,19 +21,19 @@
       image: '/assets/event1.jpeg',
       name: 'Quickswap LP Staking',
       description: 'V2 Auto Mining Pool is V2 Auto mining Poolllllllllllllllll Hey bro!',
-      link: () => push('/')
+      link: () => push('/pax/quickswap')
     },
     {
       image: '/assets/event1.jpeg',
       name: 'Klayswap Pool',
       description: 'V2 Auto Mining Pool is V2 Auto mining Poolllllllllllllllll Hey bro!',
-      link: () => push('/')
+      link: () => openInNewTab('https://google.com')
     },
     {
       image: '/assets/event1.jpeg',
       name: 'White Hole',
       description: 'V2 Auto Mining Pool is V2 Auto mining Poolllllllllllllllll Hey bro!',
-      link: () => push('/')
+      link: () => push('/pax/whitehole')
     },
     {
       image: '/assets/event1.jpeg',
@@ -54,6 +54,11 @@
       link: () => push('/pax/lotus')
     }
   ]
+
+  function openInNewTab(url: any) {
+    const win: any = window.open(url, '_blank')
+    win.focus()
+  }
 </script>
 
 <Header />
