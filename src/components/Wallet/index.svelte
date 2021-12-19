@@ -26,9 +26,9 @@
         </div>
       {/if}
     </div>
-    <div class="sub-content">
+    <!-- <div class="sub-content">
       <NectarBalance />
-    </div>
+    </div> -->
     <div class="sub-content">
       <CNDV2Balance />
     </div>
@@ -41,7 +41,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    min-height: 80vh;
+    min-height: 30vh;
     justify-content: space-between;
     align-items: flex-start;
   }

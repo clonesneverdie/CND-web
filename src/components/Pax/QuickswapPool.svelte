@@ -1,5 +1,6 @@
 <script>
   import PConnect from '@/components/PolygonConnect/index.svelte'
+  import { onMount } from 'svelte'
   import { isConnect } from '@/stores'
 
   let claimablePax = 0
@@ -9,6 +10,10 @@
   let claimValue
   let stakingValue
   let unstakingValue
+
+  onMount(() => {
+    window.scrollTo(0, 0)
+  })
 </script>
 
 <div class="container">

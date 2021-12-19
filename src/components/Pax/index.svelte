@@ -12,45 +12,51 @@
 
   const poolData: Array<PoolInfo> = [
     {
-      image: '/assets/event1.jpeg',
+      image: '/assets/pax-menu1.png',
       name: 'V2 Auto Mining',
-      description: 'V2 Auto Mining Pool is V2 Auto mining Poolllllllllllllllll Hey bro!',
+      description: 'CxNxD V2 clones automatically mine $PAX. Claim $PAX with your clones!',
       link: () => push('/pax/v2')
     },
     {
-      image: '/assets/event1.jpeg',
+      image: '/assets/pax-menu2.png',
       name: 'Quickswap LP Staking',
-      description: 'V2 Auto Mining Pool is V2 Auto mining Poolllllllllllllllll Hey bro!',
+      description: 'Get $PAX by supplying liquidity to QuickSwap and staking the LP token you received!',
       link: () => push('/pax/quickswap')
     },
     {
-      image: '/assets/event1.jpeg',
+      image: '/assets/pax-menu3.png',
       name: 'Klayswap Pool',
-      description: 'V2 Auto Mining Pool is V2 Auto mining Poolllllllllllllllll Hey bro!',
-      link: () => openInNewTab('https://google.com')
+      description: 'Supply liquidity to the clay swap and get $PAX!',
+      link: () => openInNewTab('https://klayswap.com/')
     },
     {
-      image: '/assets/event1.jpeg',
+      image: '/assets/pax-menu4.png',
       name: 'White Hole',
-      description: 'V2 Auto Mining Pool is V2 Auto mining Poolllllllllllllllll Hey bro!',
+      description: 'Make a single staking of $PAX to get additional $PAX without loss!',
       link: () => push('/pax/whitehole')
     },
     {
       image: '/assets/event1.jpeg',
-      name: 'Clone Nation',
-      description: 'V2 Auto Mining Pool is V2 Auto mining Poolllllllllllllllll Hey bro!',
-      link: () => alert('Coming Soon')
+      name: '$PAX Bridge',
+      description: 'Use Chain Horizon to bridge my $PAX to another blockchain!',
+      link: () => openInNewTab('https://pax.chainhorizon.org/')
     },
+    // {
+    //   image: '/assets/event1.jpeg',
+    //   name: 'Clone Nation',
+    //   description: 'V2 Auto Mining Pool is V2 Auto mining Poolllllllllllllllll Hey bro!',
+    //   link: () => alert('Coming Soon')
+    // },
     {
-      image: '/assets/event1.jpeg',
+      image: '/assets/pax-menu5.png',
       name: 'Clone Games',
-      description: 'V2 Auto Mining Pool is V2 Auto mining Poolllllllllllllllll Hey bro!',
+      description: 'The CxNxD team is developing a P2E game based on the clone world wide. Please wait for the game!',
       link: () => alert('Coming Soon')
     },
     {
-      image: '/assets/event1.jpeg',
+      image: '/assets/pax-menu6.png',
       name: 'Lotus',
-      description: 'V2 Auto Mining Pool is V2 Auto mining Poolllllllllllllllll Hey bro!',
+      description: 'You can mine the $Nectar token, a meme token.',
       link: () => push('/pax/lotus')
     }
   ]
@@ -68,7 +74,7 @@
       <img class="logo" src="/assets/pax-logo.png" alt="pax-logo" />
     </div>
     <div class="pool-info">Chart</div>
-    <div class="pool-info">Pool List</div>
+    <div class="pool-info">$PAX Menu</div>
     <div class="pool-list">
       {#each poolData as item}
         <div class="pool-box-wrap">

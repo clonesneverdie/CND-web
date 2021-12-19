@@ -18,6 +18,7 @@
 <style lang="scss">
   .pool-box {
     width: 100%;
+    min-height: 310px;
     box-sizing: border-box;
     border: 1px solid $highlight-color;
     border-radius: 10px;
@@ -30,7 +31,7 @@
 
   .pool-img {
     width: 100%;
-    border-radius: 10px 10px;
+    border-radius: 10px 10px 0px 0px;
     margin-bottom: 10px;
   }
 

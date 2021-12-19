@@ -1,8 +1,8 @@
 <script lang="ts">
   import PConnect from '@/components/PolygonConnect/index.svelte'
-  import LotusStaking from './LotusStaking.svelte'
   import MyStakingList from './MyStakingList.svelte'
   import Statement from './Statement.svelte'
+  // import LotusStaking from './LotusStaking.svelte'
   // import AllStakingList from './AllStakingList.svelte'
   import SaleGraph from '@/components/Mint/SaleGraph.svelte'
   import { isConnect, myAddressShort, CNDV2Contract } from '@/stores'
@@ -54,9 +54,9 @@
     </div>
 
     {#if true}
-      <div class="sub-frame">
+      <!-- <div class="sub-frame">
         <LotusStaking />
-      </div>
+      </div> -->
       <div class="sub-frame">
         <MyStakingList />
       </div>
@@ -129,7 +129,7 @@
   }
 
   .sub-frame {
-    width: 50%;
+    width: 100%;
     padding: 10px;
     box-sizing: border-box;
   }
