@@ -36,7 +36,7 @@
       link: () => push('/pax/whitehole')
     },
     {
-      image: '/assets/event1.jpeg',
+      image: '/assets/pax-menu7.png',
       name: '$PAX Bridge',
       description: 'Use Chain Horizon to bridge my $PAX to another blockchain!',
       link: () => openInNewTab('https://pax.chainhorizon.org/')
