@@ -68,10 +68,10 @@ export const V2AutoMiningContract = readable('0x5093F55B56e5c12663E8C08A80fc0545
 export const myV2TotalClaimable:any = writable(0)
 
 // Quickswap LP Token contract
-export const QuickswapLPContract = readable('')
+export const QuickswapLPContract = readable('0xf7463107b942a73bb002d42e50e549810479a662')
 export const myQLPTokenBalance:any = writable(0)
 
 // Quickswap Airdrop Pool Contract
-export const QuickswapStakingPoolContract = readable('')
+export const QuickswapStakingPoolContract = readable('0xAAd94479D53C31Fcb0C8C6Da1d83c124bd271f96')
 export const myQLPClaimable:any = writable(0)
 export const myStakedQLP:any = writable(0)

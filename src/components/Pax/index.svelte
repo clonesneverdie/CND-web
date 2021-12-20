@@ -21,8 +21,7 @@
       image: '/assets/pax-menu2.png',
       name: 'Quickswap LP Staking',
       description: 'Get $PAX by supplying liquidity to QuickSwap and staking the LP token you received!',
-      // link: () => push('/pax/quickswap')
-      link: () => alert('Coming Soon')
+      link: () => push('/pax/quickswap')
     },
     {
       image: '/assets/pax-menu3.png',
