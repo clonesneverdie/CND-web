@@ -52,7 +52,7 @@
       getInfo()
     }
   })
-  
+
   async function requestAccount() {
     await ethereum.request({ method: 'eth_requestAccounts' })
     $isConnect = true
@@ -99,6 +99,8 @@
     loadingFalse()
     await getAddress()
     await getBalance()
+    await getMyQLPTokenBalance()
+    await getQLPClaimable()
     await getNectarBalance()
     await getCNDV2Balance()
     await getMyPaxBalance()
@@ -106,8 +108,6 @@
     await getMyDevTokenBalance()
     await getMyDevFundClaimable()
     await getMyStakedDevToken()
-    await getMyQLPTokenBalance()
-    await getQLPClaimable()
     await getMyStakedQLP()
     await totalV2Claimable()
     await getMyActivedLotusList()
@@ -128,14 +128,14 @@
       await getAddress()
       await getBalance()
       await getNectarBalance()
+      await getMyQLPTokenBalance()
+      await getQLPClaimable()
       await getCNDV2Balance()
       await getMyPaxBalance()
       await getMyPaxsetBalance()
       await getMyDevTokenBalance()
       await getMyDevFundClaimable()
       await getMyStakedDevToken()
-      await getMyQLPTokenBalance()
-      await getQLPClaimable()
       await getMyStakedQLP()
       await totalV2Claimable()
       await getMyActivedLotusList()
