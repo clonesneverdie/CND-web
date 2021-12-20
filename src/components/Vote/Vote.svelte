@@ -54,7 +54,6 @@
       }
     }
     exceptVotedClones = data
-    console.log(exceptVotedClones)
     loading = true
   }
 

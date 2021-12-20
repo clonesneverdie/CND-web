@@ -1,19 +1,88 @@
 <script>
   import PConnect from '@/components/PolygonConnect/index.svelte'
   import { onMount } from 'svelte'
-  import { isConnect } from '@/stores'
+  import { ethers } from 'ethers'
 
-  let claimablePax = 0
-  let stakableLP = 0
-  let unstakableLP = 0
+  import {
+    isConnect,
+    myAddress,
+    myQLPClaimable,
+    myQLPTokenBalance,
+    myStakedQLP,
+    QuickswapLPContract,
+    QuickswapStakingPoolContract,
+    signer
+  } from '@/stores'
+  import QLPTokenABI from '@/data/abi/DevFundToken.json'
+  import QLPABI from '@/data/abi/ERC20StakingPool.json'
 
-  let claimValue
   let stakingValue
   let unstakingValue
 
   onMount(() => {
     window.scrollTo(0, 0)
   })
+
+  function maxMyQLPToken() {
+    stakingValue = $myQLPTokenBalance / 1e18
+  }
+
+  function maxStakedQLPToken() {
+    unstakingValue = $myStakedQLP / 1e18
+  }
+
+  function setZeroValue() {
+    stakingValue = 0
+    unstakingValue = 0
+  }
+
+  async function getQLPClaimable() {
+    const contract = await new ethers.Contract($QuickswapStakingPoolContract, QLPABI, $signer)
+    let _myQLPClaimable = await contract.claimableOf($myAddress)
+    $myQLPClaimable = _myQLPClaimable
+  }
+
+  async function getMyQLPTokenBalance() {
+    const contract = await new ethers.Contract($QuickswapLPContract, QLPTokenABI, $signer)
+    let _myQLPTokenBalance = await contract.balanceOf($myAddress)
+    $myQLPTokenBalance = _myQLPTokenBalance
+  }
+
+  async function getMyStakedQLP() {
+    const contract = await new ethers.Contract($QuickswapStakingPoolContract, QLPABI, $signer)
+    let _myStakedQLP = await contract.shares($myAddress)
+    $myStakedQLP = _myStakedQLP
+  }
+
+  async function claimDevPax() {
+    const contract = await new ethers.Contract($QuickswapStakingPoolContract, QLPABI, $signer)
+    const claim = await contract.claim()
+    await claim.wait()
+    await getQLPClaimable()
+  }
+
+  async function QLPTStaking() {
+    const stakingVal = stakingValue * 1e18
+    const devTokenContract = await new ethers.Contract($QuickswapLPContract, QLPTokenABI, $signer)
+    const approve = await devTokenContract.approve($QuickswapStakingPoolContract, stakingVal.toString())
+    await approve.wait()
+    const devFundContract = await new ethers.Contract($QuickswapStakingPoolContract, QLPABI, $signer)
+    const stake = await devFundContract.stake(stakingVal.toString())
+    await stake.wait()
+    setZeroValue()
+    await getMyQLPTokenBalance()
+    await getMyStakedQLP()
+  }
+
+  async function QLPTUnstaking() {
+    const unstakingVal = unstakingValue * 1e18
+    const devTokenContract = await new ethers.Contract($QuickswapStakingPoolContract, QLPABI, $signer)
+    const unstake = await devTokenContract.unstake(unstakingVal.toString())
+    await unstake.wait()
+    setZeroValue()
+    await getMyQLPTokenBalance()
+    await getMyStakedQLP()
+  }
 </script>
 
 <div class="container">
@@ -32,10 +101,10 @@
         <div class="box-content">
           <div class="box-title"><b>Claim</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">Claimable $PAX: {claimablePax}</div>
+            <div class="box-text">Claimable $PAX: {$myQLPClaimable / 1e18}</div>
           </div>
-          {#if $isConnect && claimValue > 0}
-            <div class="active-btn">
+          {#if $isConnect && $myQLPClaimable > 0}
+            <div class="active-btn" on:click="{claimDevPax}">
               <b>Claim</b>
             </div>
           {:else if $isConnect}
@@ -55,12 +124,12 @@
         <div class="box-content">
           <div class="box-title"><b>LP Token Staking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My LP Token: {stakableLP}</div>
-            <div class="text-btn">- Max</div>
+            <div class="box-text">My LP Token: {$myQLPTokenBalance / 1e18}</div>
+            <div class="text-btn" on:click="{maxMyQLPToken}">- Max</div>
           </div>
           <input type="number" bind:value="{stakingValue}" disabled="{!$isConnect}" />
           {#if $isConnect && stakingValue > 0}
-            <div class="active-btn">
+            <div class="active-btn" on:click="{QLPTStaking}">
               <b>Staking</b>
             </div>
           {:else if $isConnect}
@@ -78,12 +147,12 @@
         <div class="box-content">
           <div class="box-title"><b>LP Token Unstaking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My Staked LP Token: {unstakableLP}</div>
-            <div class="text-btn">- Max</div>
+            <div class="box-text">My Staked LP Token: {$myStakedQLP / 1e18}</div>
+            <div class="text-btn" on:click="{maxStakedQLPToken}">- Max</div>
           </div>
           <input type="number" bind:value="{unstakingValue}" disabled="{!$isConnect}" />
           {#if $isConnect && unstakingValue > 0}
-            <div class="active-btn">
+            <div class="active-btn" on:click="{QLPTUnstaking}">
               <b>Unstaking</b>
             </div>
           {:else if $isConnect}

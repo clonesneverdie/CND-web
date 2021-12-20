@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
   import { ethers } from 'ethers'
   import {
     isConnect,
@@ -28,7 +28,12 @@
     myStakedDevToken,
     V2AutoMiningContract,
     myV2TotalClaimable,
-    intMyCNDV2List
+    intMyCNDV2List,
+    QuickswapLPContract,
+    myQLPTokenBalance,
+    QuickswapStakingPoolContract,
+    myQLPClaimable,
+    myStakedQLP
   } from '@/stores'
   import NectarAbi from '@/data/abi/Nectar.json'
   import CNDV2Abi from '@/data/abi/ClonesNeverDieV2.json'
@@ -47,7 +52,7 @@
       getInfo()
     }
   })
-
+  
   async function requestAccount() {
     await ethereum.request({ method: 'eth_requestAccounts' })
     $isConnect = true
@@ -101,6 +106,9 @@
     await getMyDevTokenBalance()
     await getMyDevFundClaimable()
     await getMyStakedDevToken()
+    await getMyQLPTokenBalance()
+    await getQLPClaimable()
+    await getMyStakedQLP()
     await totalV2Claimable()
     await getMyActivedLotusList()
   }
@@ -126,6 +134,9 @@
       await getMyDevTokenBalance()
       await getMyDevFundClaimable()
       await getMyStakedDevToken()
+      await getMyQLPTokenBalance()
+      await getQLPClaimable()
+      await getMyStakedQLP()
       await totalV2Claimable()
       await getMyActivedLotusList()
     })
@@ -233,6 +244,24 @@
       _totalClaim += parseInt(data._hex)
     }
     $myV2TotalClaimable = _totalClaim
+  }
+
+  async function getMyQLPTokenBalance() {
+    const contract = await new ethers.Contract($QuickswapLPContract, DevFundTokenABI, $signer)
+    let _myQLPTokenBalance = await contract.balanceOf($myAddress)
+    $myQLPTokenBalance = _myQLPTokenBalance
+  }
+
+  async function getQLPClaimable() {
+    const contract = await new ethers.Contract($QuickswapStakingPoolContract, DevFundABI, $signer)
+    let _myQLPClaimable = await contract.claimableOf($myAddress)
+    $myQLPClaimable = _myQLPClaimable
+  }
+
+  async function getMyStakedQLP() {
+    const contract = await new ethers.Contract($QuickswapStakingPoolContract, DevFundABI, $signer)
+    let _myStakedQLP = await contract.shares($myAddress)
+    $myStakedQLP = _myStakedQLP
   }
 </script>
 

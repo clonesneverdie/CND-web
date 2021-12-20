@@ -1,9 +1,19 @@
 <script>
   import PConnect from '@/components/PolygonConnect/index.svelte'
   import { RingLoader } from 'svelte-loading-spinners'
-  import { isConnect, myCNDV2List, walletLoading, V2AutoMiningContract, signer, myV2TotalClaimable } from '@/stores'
-  import { onMount } from 'svelte'
+  import {
+    isConnect,
+    myCNDV2List,
+    walletLoading,
+    V2AutoMiningContract,
+    signer,
+    myV2TotalClaimable,
+    PaxContract,
+    intMyCNDV2List
+  } from '@/stores'
+  import { beforeUpdate, onMount } from 'svelte'
   import V2MiningABI from '@/data/abi/ClonesV2Pool.json'
+  import PaxABI from '@/data/abi/Pax.json'
   import { ethers } from 'ethers'
 
   let checkedIds = []
@@ -11,6 +21,9 @@
 
   onMount(() => {
     window.scrollTo(0, 0)
+    setInterval(() => {
+      totalV2Claimable()
+    }, 3000)
   })
 
   function cheked(num) {
@@ -41,9 +54,23 @@
   }
 
   async function v2Claim() {
+    const paxContract = await new ethers.Contract($PaxContract, PaxABI, $signer)
+    const approve = await paxContract.approve($V2AutoMiningContract, '100000000000000000000')
+    await approve.wait()
     const v2Mining = await new ethers.Contract($V2AutoMiningContract, V2MiningABI, $signer)
     const claim = await v2Mining.claim(checkedIds)
-    await claim.await()
+    await claim.wait()
+    selectNone()
+  }
+
+  async function totalV2Claimable() {
+    let _totalClaim = 0
+    const v2Mining = await new ethers.Contract($V2AutoMiningContract, V2MiningABI, $signer)
+    for (let i = 0; i < $intMyCNDV2List.length; i++) {
+      let data = await v2Mining.claimableOf($intMyCNDV2List[i])
+      _totalClaim += parseInt(data._hex)
+    }
+    $myV2TotalClaimable = _totalClaim
   }
 </script>
 
@@ -60,7 +87,7 @@
     <div class="box-wrap">
       <div class="box">
         <div class="box-content">
-          <div class="total-value">Total Pax: {$myV2TotalClaimable} $PAX</div>
+          <div class="total-value">Total Pax: {$myV2TotalClaimable / 1e18} $PAX</div>
           <div class="select-all-btn">
             <div class="text-btn" on:click="{selectAll}">- Select All</div>
             <div class="text-btn" on:click="{selectNone}">- Unselect All</div>

@@ -69,3 +69,7 @@ export const myV2TotalClaimable:any = writable(0)
 
 export const QuickswapLPContract = readable('0x1169371f8cab5c2b4592c6cddb7a3ad23ccf10b0')
 export const myQLPTokenBalance:any = writable(0)
+
+export const QuickswapStakingPoolContract = readable('0x0087b27c49d9dd5ab59F59F8b08DB1fd70fa7c64')
+export const myQLPClaimable:any = writable(0)
+export const myStakedQLP:any = writable(0)
