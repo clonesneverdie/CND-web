@@ -1,14 +1,87 @@
 <script>
   import PConnect from '@/components/PolygonConnect/index.svelte'
-  import { isConnect } from '@/stores'
+  import { onMount } from 'svelte'
+  import { ethers } from 'ethers'
+  import {
+    isConnect,
+    myDevTokenBalance,
+    myDevFundClaimable,
+    myStakedDevToken,
+    DevTokenContract,
+    DevFundContract,
+    signer,
+    myAddress
+  } from '@/stores'
+  import DevFundTokenABI from '@/data/abi/DevFundToken.json'
+  import DevFundABI from '@/data/abi/ERC20StakingPool.json'
 
-  let claimablePax = 0
-  let stakableLP = 0
-  let unstakableLP = 0
-
-  let claimValue
   let stakingValue
   let unstakingValue
+
+  onMount(() => {
+    window.scrollTo(0, 0)
+  })
+
+  function maxMyDevToken() {
+    stakingValue = $myDevTokenBalance / 1e18
+  }
+
+  function maxStakedDevToken() {
+    unstakingValue = $myStakedDevToken / 1e18
+  }
+
+  function setZeroValue() {
+    stakingValue = 0
+    unstakingValue = 0
+  }
+
+  async function getMyDevFundClaimable() {
+    const contract = await new ethers.Contract($DevFundContract, DevFundABI, $signer)
+    let _myDevFundClaimable = await contract.claimableOf($myAddress)
+    $myDevFundClaimable = _myDevFundClaimable
+  }
+
+  async function getMyDevTokenBalance() {
+    const contract = await new ethers.Contract($DevTokenContract, DevFundTokenABI, $signer)
+    let _myDevTokenBalance = await contract.balanceOf($myAddress)
+    $myDevTokenBalance = _myDevTokenBalance
+  }
+
+  async function getMyStakedDevToken() {
+    const contract = await new ethers.Contract($DevFundContract, DevFundABI, $signer)
+    let _myStakedDevToken = await contract.shares($myAddress)
+    $myStakedDevToken = _myStakedDevToken
+  }
+
+  async function claimDevPax() {
+    const contract = await new ethers.Contract($DevFundContract, DevFundABI, $signer)
+    const claim = await contract.claim()
+    await claim.wait()
+    await getMyDevFundClaimable()
+  }
+
+  async function devTokenStaking() {
+    const stakingVal = stakingValue * 1e18
+    const devTokenContract = await new ethers.Contract($DevTokenContract, DevFundTokenABI, $signer)
+    const approve = await devTokenContract.approve($DevFundContract, stakingVal.toString())
+    await approve.wait()
+    const devFundContract = await new ethers.Contract($DevFundContract, DevFundABI, $signer)
+    const stake = await devFundContract.stake(stakingVal.toString())
+    await stake.wait()
+    setZeroValue()
+    await getMyDevTokenBalance()
+    await getMyStakedDevToken()
+  }
+
+  async function devTokenUnstaking() {
+    const unstakingVal = unstakingValue * 1e18
+    const devTokenContract = await new ethers.Contract($DevFundContract, DevFundABI, $signer)
+    const unstake = await devTokenContract.unstake(unstakingVal.toString())
+    await unstake.wait()
+    setZeroValue()
+    await getMyDevTokenBalance()
+    await getMyStakedDevToken()
+  }
 </script>
 
 <div class="container">
@@ -27,12 +100,10 @@
         <div class="box-content">
           <div class="box-title"><b>Claim</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">Claimable $PAX: {claimablePax}</div>
-            <div class="text-btn">- Max</div>
+            <div class="box-text">Claimable $PAX: {$myDevFundClaimable / 1e18}</div>
           </div>
-          <input type="number" bind:value="{claimValue}" disabled="{!$isConnect}" />
-          {#if $isConnect && claimValue > 0}
-            <div class="active-btn">
+          {#if $isConnect && $myDevFundClaimable > 0}
+            <div class="active-btn" on:click="{claimDevPax}">
               <b>Claim</b>
             </div>
           {:else if $isConnect}
@@ -52,12 +123,12 @@
         <div class="box-content">
           <div class="box-title"><b>Dev Token Staking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My Dev Token: {stakableLP}</div>
-            <div class="text-btn">- Max</div>
+            <div class="box-text">My Dev Token: {$myDevTokenBalance / 1e18}</div>
+            <div class="text-btn" on:click="{maxMyDevToken}">- Max</div>
           </div>
           <input type="number" bind:value="{stakingValue}" disabled="{!$isConnect}" />
           {#if $isConnect && stakingValue > 0}
-            <div class="active-btn">
+            <div class="active-btn" on:click="{devTokenStaking}">
               <b>Staking</b>
             </div>
           {:else if $isConnect}
@@ -75,12 +146,12 @@
         <div class="box-content">
           <div class="box-title"><b>Dev Token Unstaking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My Staked Dev Token: {unstakableLP}</div>
-            <div class="text-btn">- Max</div>
+            <div class="box-text">My Staked Dev Token: {$myStakedDevToken / 1e18}</div>
+            <div class="text-btn" on:click="{maxStakedDevToken}">- Max</div>
           </div>
           <input type="number" bind:value="{unstakingValue}" disabled="{!$isConnect}" />
           {#if $isConnect && unstakingValue > 0}
-            <div class="active-btn">
+            <div class="active-btn" on:click="{devTokenUnstaking}">
               <b>Unstaking</b>
             </div>
           {:else if $isConnect}

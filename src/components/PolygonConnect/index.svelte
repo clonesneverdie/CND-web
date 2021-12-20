@@ -20,13 +20,20 @@
     PaxContract,
     myPaxBalance,
     WhiteholeContract,
-    myPaxsetBalance
+    myPaxsetBalance,
+    DevTokenContract,
+    DevFundContract,
+    myDevFundClaimable,
+    myDevTokenBalance,
+    myStakedDevToken
   } from '@/stores'
   import NectarAbi from '@/data/abi/Nectar.json'
   import CNDV2Abi from '@/data/abi/ClonesNeverDieV2.json'
   import LotusABI from '@/data/abi/LotusStaking.json'
   import PaxABI from '@/data/abi/Pax.json'
   import WhiteholeABI from '@/data/abi/Whitehole.json'
+  import DevFundTokenABI from '@/data/abi/DevFundToken.json'
+  import DevFundABI from '@/data/abi/ERC20StakingPool.json'
 
   const ethereum: any | undefined = (window as any).ethereum
   let decimals = 1e18
@@ -87,6 +94,9 @@
     await getCNDV2Balance()
     await getMyPaxBalance()
     await getMyPaxsetBalance()
+    await getMyDevTokenBalance()
+    await getMyDevFundClaimable()
+    await getMyStakedDevToken()
     await getMyActivedLotusList()
   }
 
@@ -108,6 +118,9 @@
       await getCNDV2Balance()
       await getMyPaxBalance()
       await getMyPaxsetBalance()
+      await getMyDevTokenBalance()
+      await getMyDevFundClaimable()
+      await getMyStakedDevToken()
       await getMyActivedLotusList()
     })
   }
@@ -182,6 +195,24 @@
     const contract = await new ethers.Contract($WhiteholeContract, WhiteholeABI, $signer)
     let _myPaxsetBalance = await contract.balanceOf($myAddress)
     $myPaxsetBalance = _myPaxsetBalance
+  }
+
+  async function getMyDevTokenBalance() {
+    const contract = await new ethers.Contract($DevTokenContract, DevFundTokenABI, $signer)
+    let _myDevTokenBalance = await contract.balanceOf($myAddress)
+    $myDevTokenBalance = _myDevTokenBalance
+  }
+
+  async function getMyDevFundClaimable() {
+    const contract = await new ethers.Contract($DevFundContract, DevFundABI, $signer)
+    let _myDevFundClaimable = await contract.claimableOf($myAddress)
+    $myDevFundClaimable = _myDevFundClaimable
+  }
+
+  async function getMyStakedDevToken() {
+    const contract = await new ethers.Contract($DevFundContract, DevFundABI, $signer)
+    let _myStakedDevToken = await contract.shares($myAddress)
+    $myStakedDevToken = _myStakedDevToken
   }
 </script>
 

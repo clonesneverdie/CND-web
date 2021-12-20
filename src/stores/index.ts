@@ -52,3 +52,14 @@ export const myPaxsetBalance:any = writable(0)
 
 // Buyback contract
 export const Buyback = readable('0x0e2628fA3B5097a696a601E9242f60498E26bfb9')
+
+// Dev Token contract
+export const DevTokenContract = readable('0x5D852BA2179CE9b6b7E484fa2c3467FBfdEFc160')
+export const myDevTokenBalance:any = writable(0)
+
+// Dev Fund contract
+export const DevFundContract = readable('0x0aC0824912548930f0A1eB032aD7fbD04981Ef9E')
+export const myDevFundClaimable:any = writable(0)
+export const myStakedDevToken:any = writable(0)
+
+
