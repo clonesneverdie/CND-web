@@ -41,30 +41,30 @@ export const saleCount:any = writable(0)
 export const VoteContract = readable('0x35EFE0675eFf8A22Bb33A2b2cA1cf535B1e5823e')
 
 // PAX contract
-export const PaxContract = readable('0x2aD7be3941a9E912Ad4Caea838C5311993ee529b')
+export const PaxContract = readable('0x818E6b4bEa1C1FfF712464FE057d4791Efc6D552')
 export const myPaxBalance:any = writable(0)
 
 // Pax Emitter
-export const PaxEmitter = readable('0x06679733e17286e30e53CDdfcaA1a07a381E9Efb')
+export const PaxEmitter = readable('0x97C2315DE88107DBACb0E911046F15f3bEC94360')
 
 // White Hole Contract
-export const WhiteholeContract = readable('0x53E8d9DE8e8Eb094392471e14c563e2F8dFae0Df')
+export const WhiteholeContract = readable('0xD6125A96a19f57EA1966d197497dA6D9E6D10Ac8')
 export const myPaxsetBalance:any = writable(0)
 
 // Buyback contract
-export const Buyback = readable('0x0e2628fA3B5097a696a601E9242f60498E26bfb9')
+export const Buyback = readable('0xe5136690a66672181E8791B5d269ac9143eb6c97')
 
 // Dev Token contract
-export const DevTokenContract = readable('0x5D852BA2179CE9b6b7E484fa2c3467FBfdEFc160')
+export const DevTokenContract = readable('0x0778717f440d246ff43d7d1c5c71C89D99A86e39')
 export const myDevTokenBalance:any = writable(0)
 
 // Dev Fund contract
-export const DevFundContract = readable('0x0aC0824912548930f0A1eB032aD7fbD04981Ef9E')
+export const DevFundContract = readable('0xC61a539442dC3e5403B5c465500feB50c11A64B1')
 export const myDevFundClaimable:any = writable(0)
 export const myStakedDevToken:any = writable(0)
 
 // V2 Auto Mining contract
-export const V2AutoMiningContract = readable('0x63D073bDC6AaC4E73aDeAE76E2fcEc71436BF71E')
+export const V2AutoMiningContract = readable('0x5093F55B56e5c12663E8C08A80fc054568D50dBF')
 export const myV2TotalClaimable:any = writable(0)
 
 // Quickswap LP Token contract
