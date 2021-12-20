@@ -17,6 +17,7 @@ export const CNDV2Contract = readable('0x6c15030A0055D7350c89EbbD460EB4F145462Fb
 export const CNDV2TotalSupply:any = writable(0)
 export const myCNDV2Balance:any = writable(0)
 export const myCNDV2List:any = writable([])
+export const intMyCNDV2List:any = writable([])
 export const walletLoading:any = writable(true)
 
 // Nectar contract
@@ -62,4 +63,9 @@ export const DevFundContract = readable('0x0aC0824912548930f0A1eB032aD7fbD04981E
 export const myDevFundClaimable:any = writable(0)
 export const myStakedDevToken:any = writable(0)
 
+// V2 Auto Mining contract
+export const V2AutoMiningContract = readable('0x63D073bDC6AaC4E73aDeAE76E2fcEc71436BF71E')
+export const myV2TotalClaimable:any = writable(0)
 
+export const QuickswapLPContract = readable('0x1169371f8cab5c2b4592c6cddb7a3ad23ccf10b0')
+export const myQLPTokenBalance:any = writable(0)

@@ -25,7 +25,10 @@
     DevFundContract,
     myDevFundClaimable,
     myDevTokenBalance,
-    myStakedDevToken
+    myStakedDevToken,
+    V2AutoMiningContract,
+    myV2TotalClaimable,
+    intMyCNDV2List
   } from '@/stores'
   import NectarAbi from '@/data/abi/Nectar.json'
   import CNDV2Abi from '@/data/abi/ClonesNeverDieV2.json'
@@ -34,6 +37,7 @@
   import WhiteholeABI from '@/data/abi/Whitehole.json'
   import DevFundTokenABI from '@/data/abi/DevFundToken.json'
   import DevFundABI from '@/data/abi/ERC20StakingPool.json'
+  import ClonesV2PoolABI from '@/data/abi/ClonesV2Pool.json'
 
   const ethereum: any | undefined = (window as any).ethereum
   let decimals = 1e18
@@ -97,6 +101,7 @@
     await getMyDevTokenBalance()
     await getMyDevFundClaimable()
     await getMyStakedDevToken()
+    await totalV2Claimable()
     await getMyActivedLotusList()
   }
 
@@ -121,6 +126,7 @@
       await getMyDevTokenBalance()
       await getMyDevFundClaimable()
       await getMyStakedDevToken()
+      await totalV2Claimable()
       await getMyActivedLotusList()
     })
   }
@@ -174,14 +180,18 @@
 
   async function getCNDV2Balance() {
     let _myCNDV2List = []
+    let _intMyCNDV2List = []
     const contract = await new ethers.Contract($CNDV2Contract, CNDV2Abi, $signer)
     let _myCNDV2Balance = await contract.balanceOf($myAddress)
     for (let i = 0; i < _myCNDV2Balance; i++) {
       let tokenId = await contract.tokenOfOwnerByIndex($myAddress, i)
       _myCNDV2List.push(tokenId)
+      _intMyCNDV2List.push(parseInt(tokenId._hex))
     }
     $myCNDV2Balance = _myCNDV2Balance
     $myCNDV2List = _myCNDV2List
+    $intMyCNDV2List = _intMyCNDV2List
+
     $walletLoading = true
   }
 
@@ -213,6 +223,16 @@
     const contract = await new ethers.Contract($DevFundContract, DevFundABI, $signer)
     let _myStakedDevToken = await contract.shares($myAddress)
     $myStakedDevToken = _myStakedDevToken
+  }
+
+  async function totalV2Claimable() {
+    let _totalClaim = 0
+    const v2Mining = await new ethers.Contract($V2AutoMiningContract, ClonesV2PoolABI, $signer)
+    for (let i = 0; i < $intMyCNDV2List.length; i++) {
+      let data = await v2Mining.claimableOf($intMyCNDV2List[i])
+      _totalClaim += parseInt(data._hex)
+    }
+    $myV2TotalClaimable = _totalClaim
   }
 </script>
 

@@ -33,9 +33,7 @@
           <div class="box-title"><b>Claim</b></div>
           <div class="box-text-wrap">
             <div class="box-text">Claimable $PAX: {claimablePax}</div>
-            <div class="text-btn">- Max</div>
           </div>
-          <input type="number" bind:value="{claimValue}" disabled="{!$isConnect}" />
           {#if $isConnect && claimValue > 0}
             <div class="active-btn">
               <b>Claim</b>

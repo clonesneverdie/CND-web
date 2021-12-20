@@ -1,8 +1,10 @@
 <script>
   import PConnect from '@/components/PolygonConnect/index.svelte'
   import { RingLoader } from 'svelte-loading-spinners'
-  import { isConnect, myCNDV2List, walletLoading } from '@/stores'
+  import { isConnect, myCNDV2List, walletLoading, V2AutoMiningContract, signer, myV2TotalClaimable } from '@/stores'
   import { onMount } from 'svelte'
+  import V2MiningABI from '@/data/abi/ClonesV2Pool.json'
+  import { ethers } from 'ethers'
 
   let checkedIds = []
   let loading = true
@@ -31,6 +33,18 @@
     let data = []
     checkedIds = data
   }
+
+  async function v2Claimable(i) {
+    const v2Mining = await new ethers.Contract($V2AutoMiningContract, V2MiningABI, $signer)
+    const claimData = await v2Mining.claimableOf(i)
+    return parseInt(claimData._hex) / 1e18
+  }
+
+  async function v2Claim() {
+    const v2Mining = await new ethers.Contract($V2AutoMiningContract, V2MiningABI, $signer)
+    const claim = await v2Mining.claim(checkedIds)
+    await claim.await()
+  }
 </script>
 
 <div class="container">
@@ -46,7 +60,7 @@
     <div class="box-wrap">
       <div class="box">
         <div class="box-content">
-          <div class="total-value">Total Pax: 30 $PAX</div>
+          <div class="total-value">Total Pax: {$myV2TotalClaimable} $PAX</div>
           <div class="select-all-btn">
             <div class="text-btn" on:click="{selectAll}">- Select All</div>
             <div class="text-btn" on:click="{selectNone}">- Unselect All</div>
@@ -70,12 +84,18 @@
                   <div class="check" value="{item}" on:click="{() => cheked(item)}"></div>
                 {/if}
                 <div class="item-name">#{item}</div>
-                <div class="item-id">{item}</div>
+                <div class="item-id">
+                  {#await v2Claimable(item)}
+                    0
+                  {:then data}
+                    {data}
+                  {/await}
+                </div>
               </div>
             {/each}
           </div>
           {#if $isConnect && checkedIds.length > 0}
-            <div class="claim-btn">
+            <div class="claim-btn" on:click="{v2Claim}">
               <b>Claim</b>
             </div>
           {:else if $isConnect && checkedIds.length === 0}
