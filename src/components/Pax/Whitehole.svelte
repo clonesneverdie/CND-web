@@ -1,17 +1,68 @@
 <script>
   import PConnect from '@/components/PolygonConnect/index.svelte'
   import { onMount } from 'svelte'
-  import { isConnect } from '@/stores'
-
-  let stakableLP = 0
-  let unstakableLP = 0
+  import { isConnect, WhiteholeContract, signer, myAddress, myPaxBalance, myPaxsetBalance, PaxContract } from '@/stores'
+  import PaxABI from '@/data/abi/Pax.json'
+  import WhiteholeABI from '@/data/abi/Whitehole.json'
+  import { ethers } from 'ethers'
 
   let stakingValue
   let unstakingValue
+  $: $myPaxBalance
+  $: $myPaxsetBalance
+
 
   onMount(() => {
     window.scrollTo(0, 0)
   })
+
+  function maxPax() {
+    stakingValue = $myPaxBalance / 1e18
+  }
+
+  function maxPaxset() {
+    unstakingValue = $myPaxsetBalance / 1e18
+  }
+
+  function setZeroValue() {
+    stakingValue = 0
+    unstakingValue = 0
+  }
+
+  async function getMyPaxBalance() {
+    const contract = await new ethers.Contract($PaxContract, PaxABI, $signer)
+    let _myPaxBalance = await contract.balanceOf($myAddress)
+    $myPaxBalance = _myPaxBalance
+  }
+
+  async function getMyPaxsetBalance() {
+    const contract = await new ethers.Contract($WhiteholeContract, WhiteholeABI, $signer)
+    let _myPaxsetBalance = await contract.balanceOf($myAddress)
+    $myPaxsetBalance = _myPaxsetBalance
+  }
+
+  async function paxWhiteholeStake() {
+    const stakingVal = stakingValue * 1e18
+    const paxContract = await new ethers.Contract($PaxContract, PaxABI, $signer)
+    const approve = await paxContract.approve($WhiteholeContract, stakingVal.toString())
+    await approve.wait()
+    const whiteholeContract = await new ethers.Contract($WhiteholeContract, WhiteholeABI, $signer)
+    const stake = await whiteholeContract.stake(stakingVal.toString())
+    await stake.wait()
+    getMyPaxBalance()
+    getMyPaxsetBalance()
+    setZeroValue()
+  }
+
+  async function paxsetUnstake() {
+    const unstakingVal = unstakingValue * 1e18
+    const whiteholeContract = await new ethers.Contract($WhiteholeContract, WhiteholeABI, $signer)
+    const unstake = await whiteholeContract.unstake(unstakingVal.toString())
+    await unstake.wait()
+    getMyPaxBalance()
+    getMyPaxsetBalance()
+    setZeroValue()
+  }
 </script>
 
 <div class="container">
@@ -33,12 +84,12 @@
         <div class="box-content">
           <div class="box-title"><b>$PAX Staking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My $PAX: {stakableLP}</div>
-            <div class="text-btn">- Max</div>
+            <div class="box-text">My $PAX: {$myPaxBalance / 1e18}</div>
+            <div class="text-btn" on:click="{maxPax}">- Max</div>
           </div>
           <input type="number" bind:value="{stakingValue}" disabled="{!$isConnect}" />
           {#if $isConnect && stakingValue > 0}
-            <div class="active-btn">
+            <div class="active-btn" on:click="{paxWhiteholeStake}">
               <b>Staking</b>
             </div>
           {:else if $isConnect}
@@ -56,12 +107,12 @@
         <div class="box-content">
           <div class="box-title"><b>$PAX Unstaking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My $PAXSET: {unstakableLP}</div>
-            <div class="text-btn">- Max</div>
+            <div class="box-text">My $PAXSET: {$myPaxsetBalance / 1e18}</div>
+            <div class="text-btn" on:click="{maxPaxset}">- Max</div>
           </div>
           <input type="number" bind:value="{unstakingValue}" disabled="{!$isConnect}" />
           {#if $isConnect && unstakingValue > 0}
-            <div class="active-btn">
+            <div class="active-btn" on:click="{paxsetUnstake}">
               <b>Unstaking</b>
             </div>
           {:else if $isConnect}

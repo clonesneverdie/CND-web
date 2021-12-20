@@ -16,11 +16,17 @@
     LotusContract,
     myLotusList,
     walletLoading,
-    lotusLoading
+    lotusLoading,
+    PaxContract,
+    myPaxBalance,
+    WhiteholeContract,
+    myPaxsetBalance
   } from '@/stores'
   import NectarAbi from '@/data/abi/Nectar.json'
   import CNDV2Abi from '@/data/abi/ClonesNeverDieV2.json'
   import LotusABI from '@/data/abi/LotusStaking.json'
+  import PaxABI from '@/data/abi/Pax.json'
+  import WhiteholeABI from '@/data/abi/Whitehole.json'
 
   const ethereum: any | undefined = (window as any).ethereum
   let decimals = 1e18
@@ -79,6 +85,8 @@
     await getBalance()
     await getNectarBalance()
     await getCNDV2Balance()
+    await getMyPaxBalance()
+    await getMyPaxsetBalance()
     await getMyActivedLotusList()
   }
 
@@ -98,6 +106,8 @@
       await getBalance()
       await getNectarBalance()
       await getCNDV2Balance()
+      await getMyPaxBalance()
+      await getMyPaxsetBalance()
       await getMyActivedLotusList()
     })
   }
@@ -160,6 +170,18 @@
     $myCNDV2Balance = _myCNDV2Balance
     $myCNDV2List = _myCNDV2List
     $walletLoading = true
+  }
+
+  async function getMyPaxBalance() {
+    const contract = await new ethers.Contract($PaxContract, PaxABI, $signer)
+    let _myPaxBalance = await contract.balanceOf($myAddress)
+    $myPaxBalance = _myPaxBalance
+  }
+
+  async function getMyPaxsetBalance() {
+    const contract = await new ethers.Contract($WhiteholeContract, WhiteholeABI, $signer)
+    let _myPaxsetBalance = await contract.balanceOf($myAddress)
+    $myPaxsetBalance = _myPaxsetBalance
   }
 </script>
 

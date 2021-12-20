@@ -41,12 +41,14 @@ export const VoteContract = readable('0x35EFE0675eFf8A22Bb33A2b2cA1cf535B1e5823e
 
 // PAX contract
 export const PaxContract = readable('0x2aD7be3941a9E912Ad4Caea838C5311993ee529b')
+export const myPaxBalance:any = writable(0)
 
 // Pax Emitter
 export const PaxEmitter = readable('0x06679733e17286e30e53CDdfcaA1a07a381E9Efb')
 
 // White Hole Contract
 export const WhiteholeContract = readable('0x53E8d9DE8e8Eb094392471e14c563e2F8dFae0Df')
+export const myPaxsetBalance:any = writable(0)
 
 // Buyback contract
 export const Buyback = readable('0x0e2628fA3B5097a696a601E9242f60498E26bfb9')

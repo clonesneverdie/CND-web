@@ -12,7 +12,7 @@
 </script>
 
 <div class="container">
-  <div class="container-title">Quickswap LP Staking</div>
+  <div class="container-title">Dev Fund</div>
   <div class="container-content">
     <div class="container-paragraph">
       $PAX is a token used in the CxNxD ecosystem and is used to use the utility provided by CxNxD.
@@ -50,9 +50,9 @@
     <div class="box-wrap">
       <div class="box">
         <div class="box-content">
-          <div class="box-title"><b>LP Token Staking</b></div>
+          <div class="box-title"><b>Dev Token Staking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My LP Token: {stakableLP}</div>
+            <div class="box-text">My Dev Token: {stakableLP}</div>
             <div class="text-btn">- Max</div>
           </div>
           <input type="number" bind:value="{stakingValue}" disabled="{!$isConnect}" />
@@ -73,9 +73,9 @@
       </div>
       <div class="box">
         <div class="box-content">
-          <div class="box-title"><b>LP Token Unstaking</b></div>
+          <div class="box-title"><b>Dev Token Unstaking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My Staked LP Token: {unstakableLP}</div>
+            <div class="box-text">My Staked Dev Token: {unstakableLP}</div>
             <div class="text-btn">- Max</div>
           </div>
           <input type="number" bind:value="{unstakingValue}" disabled="{!$isConnect}" />
