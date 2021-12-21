@@ -27,7 +27,7 @@
       image: '/assets/pax-menu3.png',
       name: 'Klayswap Pool',
       description: 'Supply liquidity to the clay swap and get $PAX!',
-      link: () => openInNewTab('https://klayswap.com/')
+      link: () => openInNewTab('https://klayswap.com/exchange/pool/detail/0x21e254edd252c753f92c763235b4f98d2a78dd3d')
     },
     {
       image: '/assets/pax-menu4.png',
@@ -73,7 +73,19 @@
     <div class="logo-wrap">
       <img class="logo" src="/assets/pax-logo.png" alt="pax-logo" />
     </div>
-    <div class="pool-info">Chart</div>
+    <div class="pax-info-wrap">
+      <div class="pax-info">
+        <a href="https://info.quickswap.exchange/#/token/0x818e6b4bea1c1fff712464fe057d4791efc6d552" target="_blank"
+          >$PAX Quickswap chart</a
+        >
+      </div>
+      <div class="pax-info">
+        <a href="https://dexata.kr/?tokenA=0x95f04d09a8dc87edcf1ba6fed443993fa2466465&tokenB=" target="_blank"
+          >$KPAX Dexata chart</a
+        >
+      </div>
+    </div>
+    <!-- <div class="pool-info">Chart</div> -->
     <div class="pool-info">$PAX Menu</div>
     <div class="pool-list">
       {#each poolData as item}
@@ -118,6 +130,26 @@
     width: 33.3%;
     padding: 10px;
     box-sizing: border-box;
+  }
+
+  .pax-info-wrap {
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    a {
+      color: $highlight-color;
+      margin: 10px;
+    }
+  }
+
+  .pax-info {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   @media screen and (max-width: 768px) {

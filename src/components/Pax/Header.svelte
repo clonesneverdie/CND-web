@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="container-title">PAX</div>
+  <div class="container-title">$PAX</div>
   <div class="container-content">
     <div class="container-paragraph">
       $PAX is a token used in the CxNxD ecosystem and is used to use the utility provided by CxNxD.
