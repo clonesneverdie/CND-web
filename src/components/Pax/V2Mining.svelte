@@ -11,7 +11,7 @@
     PaxContract,
     intMyCNDV2List
   } from '@/stores'
-  import { beforeUpdate, onMount } from 'svelte'
+  import { onMount } from 'svelte'
   import V2MiningABI from '@/data/abi/ClonesV2Pool.json'
   import PaxABI from '@/data/abi/Pax.json'
   import { ethers } from 'ethers'
@@ -21,9 +21,7 @@
 
   onMount(() => {
     window.scrollTo(0, 0)
-    setInterval(() => {
-      totalV2Claimable()
-    }, 3000)
+    totalV2Claimable()
   })
 
   function cheked(num) {
