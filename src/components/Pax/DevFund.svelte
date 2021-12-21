@@ -15,24 +15,52 @@
   import DevFundTokenABI from '@/data/abi/DevFundToken.json'
   import DevFundABI from '@/data/abi/ERC20StakingPool.json'
 
+  let myClaimable = 0
+  let myToken = 0
+  let myStakedToken = 0
+
   let stakingValue
   let unstakingValue
+
+  $: if ($myDevFundClaimable > 0) {
+    claimablePaxToShort()
+  }
+
+  $: if ($myDevTokenBalance > 0) {
+    myDevTokenToShort()
+  }
+
+  $: if ($myStakedDevToken > 0) {
+    myStakedTokenToShort()
+  }
 
   onMount(() => {
     window.scrollTo(0, 0)
   })
 
-  function maxMyDevToken() {
-    stakingValue = $myDevTokenBalance / 1e18
-  }
-
-  function maxStakedDevToken() {
-    unstakingValue = $myStakedDevToken / 1e18
-  }
-
   function setZeroValue() {
     stakingValue = 0
     unstakingValue = 0
+  }
+
+  function claimablePaxToShort() {
+    myClaimable = (+ethers.utils.formatEther($myDevFundClaimable)).toFixed(4)
+  }
+
+  function myDevTokenToShort() {
+    myToken = (+ethers.utils.formatEther($myDevTokenBalance)).toFixed(4)
+  }
+
+  function myStakedTokenToShort() {
+    myStakedToken = (+ethers.utils.formatEther($myStakedDevToken)).toFixed(4)
+  }
+
+  function maxMyDevToken() {
+    stakingValue = ethers.utils.formatEther($myDevTokenBalance)
+  }
+
+  function maxStakedDevToken() {
+    unstakingValue = ethers.utils.formatEther($myStakedDevToken)
   }
 
   async function getMyDevFundClaimable() {
@@ -57,30 +85,25 @@
     const contract = await new ethers.Contract($DevFundContract, DevFundABI, $signer)
     const claim = await contract.claim()
     await claim.wait()
-    await getMyDevFundClaimable()
   }
 
   async function devTokenStaking() {
-    const stakingVal = stakingValue * 1e18
+    const stakingVal = ethers.utils.parseEther(stakingValue)
     const devTokenContract = await new ethers.Contract($DevTokenContract, DevFundTokenABI, $signer)
-    const approve = await devTokenContract.approve($DevFundContract, stakingVal.toString())
+    const approve = await devTokenContract.approve($DevFundContract, stakingVal)
     await approve.wait()
     const devFundContract = await new ethers.Contract($DevFundContract, DevFundABI, $signer)
-    const stake = await devFundContract.stake(stakingVal.toString())
+    const stake = await devFundContract.stake(stakingVal)
     await stake.wait()
     setZeroValue()
-    await getMyDevTokenBalance()
-    await getMyStakedDevToken()
   }
 
   async function devTokenUnstaking() {
-    const unstakingVal = unstakingValue * 1e18
+    const unstakingVal = ethers.utils.parseEther(unstakingValue)
     const devTokenContract = await new ethers.Contract($DevFundContract, DevFundABI, $signer)
-    const unstake = await devTokenContract.unstake(unstakingVal.toString())
+    const unstake = await devTokenContract.unstake(unstakingVal)
     await unstake.wait()
     setZeroValue()
-    await getMyDevTokenBalance()
-    await getMyStakedDevToken()
   }
 </script>
 
@@ -100,7 +123,7 @@
         <div class="box-content">
           <div class="box-title"><b>Claim</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">Claimable $PAX: {$myDevFundClaimable / 1e18}</div>
+            <div class="box-text">Claimable $PAX: {myClaimable}</div>
           </div>
           {#if $isConnect && $myDevFundClaimable > 0}
             <div class="active-btn" on:click="{claimDevPax}">
@@ -123,7 +146,7 @@
         <div class="box-content">
           <div class="box-title"><b>Dev Token Staking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My Dev Token: {$myDevTokenBalance / 1e18}</div>
+            <div class="box-text">My Dev Token: {myToken}</div>
             <div class="text-btn" on:click="{maxMyDevToken}">- Max</div>
           </div>
           <input type="number" bind:value="{stakingValue}" disabled="{!$isConnect}" />
@@ -146,7 +169,7 @@
         <div class="box-content">
           <div class="box-title"><b>Dev Token Unstaking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My Staked Dev Token: {$myStakedDevToken / 1e18}</div>
+            <div class="box-text">My Staked Dev Token: {myStakedToken}</div>
             <div class="text-btn" on:click="{maxStakedDevToken}">- Max</div>
           </div>
           <input type="number" bind:value="{unstakingValue}" disabled="{!$isConnect}" />
