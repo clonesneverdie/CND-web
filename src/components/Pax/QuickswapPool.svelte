@@ -88,7 +88,7 @@
   }
 
   async function QLPTStaking() {
-    const stakingVal = ethers.utils.parseEther(stakingValue.toString())
+    const stakingVal = ethers.utils.parseEther(stakingValue)
     const devTokenContract = new ethers.Contract($QuickswapLPContract, QLPTokenABI, $signer)
     const approve = await devTokenContract.approve($QuickswapStakingPoolContract, stakingVal)
     await approve.wait()
@@ -99,7 +99,7 @@
   }
 
   async function QLPTUnstaking() {
-    const unstakingVal = ethers.utils.parseEther(unstakingValue.toString())
+    const unstakingVal = ethers.utils.parseEther(unstakingValue)
     const devTokenContract = new ethers.Contract($QuickswapStakingPoolContract, QLPABI, $signer)
     const unstake = await devTokenContract.unstake(unstakingVal)
     await unstake.wait()

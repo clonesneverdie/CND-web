@@ -6,27 +6,43 @@
   import WhiteholeABI from '@/data/abi/Whitehole.json'
   import { ethers } from 'ethers'
 
+  let myPaxToken = 0
+  let myPaxsetToken = 0
+
   let stakingValue
   let unstakingValue
-  $: $myPaxBalance
-  $: $myPaxsetBalance
 
+  $: if ($myPaxBalance > 0) {
+    myPaxTokenToShort()
+  }
+
+  $: if ($myPaxsetBalance > 0) {
+    myPaxsetTokenToShort()
+  }
 
   onMount(() => {
     window.scrollTo(0, 0)
   })
 
-  function maxPax() {
-    stakingValue = $myPaxBalance / 1e18
-  }
-
-  function maxPaxset() {
-    unstakingValue = $myPaxsetBalance / 1e18
-  }
-
   function setZeroValue() {
     stakingValue = 0
     unstakingValue = 0
+  }
+
+  function maxPax() {
+    stakingValue = ethers.utils.formatEther($myPaxBalance)
+  }
+
+  function maxPaxset() {
+    unstakingValue = ethers.utils.formatEther($myPaxsetBalance)
+  }
+
+  function myPaxTokenToShort() {
+    myPaxToken = (+ethers.utils.formatEther($myPaxBalance)).toFixed(4)
+  }
+
+  function myPaxsetTokenToShort() {
+    myPaxsetToken = (+ethers.utils.formatEther($myPaxsetBalance)).toFixed(4)
   }
 
   async function getMyPaxBalance() {
@@ -42,25 +58,21 @@
   }
 
   async function paxWhiteholeStake() {
-    const stakingVal = stakingValue * 1e18
+    const stakingVal = ethers.utils.parseEther(stakingValue)
     const paxContract = await new ethers.Contract($PaxContract, PaxABI, $signer)
-    const approve = await paxContract.approve($WhiteholeContract, stakingVal.toString())
+    const approve = await paxContract.approve($WhiteholeContract, stakingVal)
     await approve.wait()
     const whiteholeContract = await new ethers.Contract($WhiteholeContract, WhiteholeABI, $signer)
-    const stake = await whiteholeContract.stake(stakingVal.toString())
+    const stake = await whiteholeContract.stake(stakingVal)
     await stake.wait()
-    getMyPaxBalance()
-    getMyPaxsetBalance()
     setZeroValue()
   }
 
   async function paxsetUnstake() {
-    const unstakingVal = unstakingValue * 1e18
+    const unstakingVal = ethers.utils.parseEther(unstakingValue)
     const whiteholeContract = await new ethers.Contract($WhiteholeContract, WhiteholeABI, $signer)
-    const unstake = await whiteholeContract.unstake(unstakingVal.toString())
+    const unstake = await whiteholeContract.unstake(unstakingVal)
     await unstake.wait()
-    getMyPaxBalance()
-    getMyPaxsetBalance()
     setZeroValue()
   }
 </script>
@@ -84,7 +96,7 @@
         <div class="box-content">
           <div class="box-title"><b>$PAX Staking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My $PAX: {$myPaxBalance / 1e18}</div>
+            <div class="box-text">My $PAX: {myPaxToken}</div>
             <div class="text-btn" on:click="{maxPax}">- Max</div>
           </div>
           <input type="number" bind:value="{stakingValue}" disabled="{!$isConnect}" />
@@ -107,7 +119,7 @@
         <div class="box-content">
           <div class="box-title"><b>$PAX Unstaking</b></div>
           <div class="box-text-wrap">
-            <div class="box-text">My $PAXSET: {$myPaxsetBalance / 1e18}</div>
+            <div class="box-text">My $PAXSET: {myPaxsetToken}</div>
             <div class="text-btn" on:click="{maxPaxset}">- Max</div>
           </div>
           <input type="number" bind:value="{unstakingValue}" disabled="{!$isConnect}" />
