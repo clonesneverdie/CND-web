@@ -46,16 +46,16 @@
   }
 
   async function v2Claimable(i) {
-    const v2Mining = await new ethers.Contract($V2AutoMiningContract, V2MiningABI, $signer)
+    const v2Mining = new ethers.Contract($V2AutoMiningContract, V2MiningABI, $signer)
     const claimData = await v2Mining.claimableOf(i)
     return parseInt(claimData._hex) / 1e18
   }
 
   async function v2Claim() {
-    const paxContract = await new ethers.Contract($PaxContract, PaxABI, $signer)
+    const paxContract = new ethers.Contract($PaxContract, PaxABI, $signer)
     const approve = await paxContract.approve($V2AutoMiningContract, '1000000000000000000000000')
     await approve.wait()
-    const v2Mining = await new ethers.Contract($V2AutoMiningContract, V2MiningABI, $signer)
+    const v2Mining = new ethers.Contract($V2AutoMiningContract, V2MiningABI, $signer)
     const claim = await v2Mining.claim(checkedIds)
     await claim.wait()
     selectNone()
@@ -63,7 +63,7 @@
 
   async function totalV2Claimable() {
     let _totalClaim = 0
-    const v2Mining = await new ethers.Contract($V2AutoMiningContract, V2MiningABI, $signer)
+    const v2Mining = new ethers.Contract($V2AutoMiningContract, V2MiningABI, $signer)
     for (let i = 0; i < $intMyCNDV2List.length; i++) {
       let data = await v2Mining.claimableOf($intMyCNDV2List[i])
       _totalClaim += parseInt(data._hex)

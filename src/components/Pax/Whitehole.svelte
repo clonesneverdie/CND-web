@@ -59,7 +59,7 @@
 
   async function paxWhiteholeStake() {
     const stakingVal = ethers.utils.parseEther(stakingValue)
-    const paxContract = await new ethers.Contract($PaxContract, PaxABI, $signer)
+    const paxContract = new ethers.Contract($PaxContract, PaxABI, $signer)
     const approve = await paxContract.approve($WhiteholeContract, stakingVal)
     await approve.wait()
     const whiteholeContract = await new ethers.Contract($WhiteholeContract, WhiteholeABI, $signer)
@@ -70,7 +70,7 @@
 
   async function paxsetUnstake() {
     const unstakingVal = ethers.utils.parseEther(unstakingValue)
-    const whiteholeContract = await new ethers.Contract($WhiteholeContract, WhiteholeABI, $signer)
+    const whiteholeContract = new ethers.Contract($WhiteholeContract, WhiteholeABI, $signer)
     const unstake = await whiteholeContract.unstake(unstakingVal)
     await unstake.wait()
     setZeroValue()
