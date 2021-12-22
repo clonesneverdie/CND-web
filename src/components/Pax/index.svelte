@@ -14,31 +14,31 @@
     {
       image: '/assets/pax-menu1.png',
       name: 'V2 Auto Mining',
-      description: 'CxNxD V2 clones automatically mine $PAX. Claim $PAX with your clones!',
+      description: 'CxNxD V2 clones automatically mine PAX. Claim PAX with your clones!',
       link: () => push('/pax/v2')
     },
     {
       image: '/assets/pax-menu2.png',
       name: 'Quickswap LP Staking',
-      description: 'Get $PAX by supplying liquidity to QuickSwap and staking the LP token you received!',
+      description: 'Get PAX by supplying liquidity to QuickSwap and staking the LP token you received!',
       link: () => push('/pax/quickswap')
     },
     {
       image: '/assets/pax-menu3.png',
       name: 'Klayswap Pool',
-      description: 'Supply liquidity to the clay swap and get $PAX!',
+      description: 'Supply liquidity to the clay swap and get PAX!',
       link: () => openInNewTab('https://klayswap.com/exchange/pool/detail/0x21e254edd252c753f92c763235b4f98d2a78dd3d')
     },
     {
       image: '/assets/pax-menu4.png',
       name: 'White Hole',
-      description: 'Make a single staking of $PAX to get additional $PAX without loss!',
+      description: 'Make a single staking of PAX to get additional PAX without loss!',
       link: () => push('/pax/whitehole')
     },
     {
       image: '/assets/pax-menu7.png',
       name: '$PAX Bridge',
-      description: 'Use Chain Horizon to bridge my $PAX to another blockchain!',
+      description: 'Use Chain Horizon to bridge my PAX to another blockchain!',
       link: () => openInNewTab('https://pax.chainhorizon.org/')
     },
     // {
@@ -56,7 +56,7 @@
     {
       image: '/assets/pax-menu6.png',
       name: 'Lotus',
-      description: 'You can mine the $Nectar token, a meme token.',
+      description: 'You can mine the Nectar token, a meme token.',
       link: () => push('/pax/lotus')
     }
   ]
@@ -75,18 +75,23 @@
     </div>
     <div class="pax-info-wrap">
       <div class="pax-info">
+        <a href="/assets/KO_PAX White Paper 1.0.0.pdf" target="_blank" download
+          >[KO] PAX White Paper download</a
+        >
+      </div>
+      <div class="pax-info">
         <a href="https://info.quickswap.exchange/#/token/0x818e6b4bea1c1fff712464fe057d4791efc6d552" target="_blank"
-          >$PAX Quickswap chart</a
+          >PAX Quickswap chart</a
         >
       </div>
       <div class="pax-info">
         <a href="https://dexata.kr/?tokenA=0x95f04d09a8dc87edcf1ba6fed443993fa2466465&tokenB=" target="_blank"
-          >$KPAX Dexata chart</a
+          >KPAX Dexata chart</a
         >
       </div>
     </div>
     <!-- <div class="pool-info">Chart</div> -->
-    <div class="pool-info">$PAX Menu</div>
+    <div class="pool-info">PAX Menu</div>
     <div class="pool-list">
       {#each poolData as item}
         <div class="pool-box-wrap">

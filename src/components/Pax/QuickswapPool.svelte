@@ -9,6 +9,7 @@
     myQLPClaimable,
     myQLPTokenBalance,
     myStakedQLP,
+    publicPolygonRPC,
     QuickswapLPContract,
     QuickswapStakingPoolContract,
     signer
@@ -21,6 +22,10 @@
   let myStakedToken = 0
   let stakingValue
   let unstakingValue
+
+  let lpPoolLPBalance
+
+  const provider = new ethers.providers.JsonRpcProvider($publicPolygonRPC)
 
   $: if ($myQLPClaimable > 0) {
     claimablePaxToShort()
@@ -36,6 +41,7 @@
 
   onMount(() => {
     window.scrollTo(0, 0)
+    getPoolInfo()
   })
 
   function setZeroValue() {
@@ -105,6 +111,13 @@
     await unstake.wait()
     setZeroValue()
   }
+
+  async function getPoolInfo() {
+    const lpContract = new ethers.Contract($QuickswapLPContract, QLPTokenABI, provider)
+    const LPBalanceOf = await lpContract.balanceOf($QuickswapStakingPoolContract)
+    const totalLpBalanceOf = ethers.utils.formatEther(LPBalanceOf)
+    lpPoolLPBalance = (totalLpBalanceOf * 1).toFixed(4)
+  }
 </script>
 
 <div class="container">
@@ -120,6 +133,12 @@
   <div class="container-content-wrap">
     <div class="box-wrap">
       <div class="box">
+        <div class="box-content">
+          <div class="box-title"><b>Pool Info</b></div>
+          <div class="box-text-wrap">
+            <div class="box-text">Total Staked Token: {lpPoolLPBalance} LP Token</div>
+          </div>
+        </div>
         <div class="box-content">
           <div class="box-title"><b>Claim</b></div>
           <div class="box-text-wrap">
@@ -219,16 +238,18 @@
 
   .box {
     display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     border: 2px solid $highlight-color;
     box-sizing: border-box;
     border-radius: 10px;
     margin-bottom: 25px;
+    justify-content: space-between;
   }
 
   .box-content {
-    width: 100%;
+    /* width: 100%; */
     padding: 30px;
     display: flex;
     flex-direction: column;

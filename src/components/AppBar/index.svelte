@@ -23,7 +23,7 @@
     <li><a href="/#/mint" on:click="{clickedToggleBtn}">MINT</a></li>
     <li><a href="/#/wallet" on:click="{clickedToggleBtn}">WALLET</a></li>
     <li><a href="/#/vote" on:click="{clickedToggleBtn}">VOTE</a></li>
-    <li><a href="/#/pax" on:click="{clickedToggleBtn}">$PAX</a></li>
+    <li><a href="/#/pax" on:click="{clickedToggleBtn}">PAX</a></li>
     <li><a href="/#/comics" on:click="{clickedToggleBtn}">COMICS</a></li>
     <li><a href="/#/about" on:click="{clickedToggleBtn}">ABOUT</a></li>
   </ul>

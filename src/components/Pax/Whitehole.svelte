@@ -1,13 +1,26 @@
 <script>
   import PConnect from '@/components/PolygonConnect/index.svelte'
   import { onMount } from 'svelte'
-  import { isConnect, WhiteholeContract, signer, myAddress, myPaxBalance, myPaxsetBalance, PaxContract } from '@/stores'
+  import {
+    isConnect,
+    WhiteholeContract,
+    signer,
+    myAddress,
+    myPaxBalance,
+    myPaxsetBalance,
+    PaxContract,
+    publicPolygonRPC
+  } from '@/stores'
   import PaxABI from '@/data/abi/Pax.json'
   import WhiteholeABI from '@/data/abi/Whitehole.json'
   import { ethers } from 'ethers'
 
+  const provider = new ethers.providers.JsonRpcProvider($publicPolygonRPC)
+
   let myPaxToken = 0
   let myPaxsetToken = 0
+  let currentPaxsetValue = 0
+  let totalStakedPax = 0
 
   let stakingValue
   let unstakingValue
@@ -22,6 +35,7 @@
 
   onMount(() => {
     window.scrollTo(0, 0)
+    getPaxsetValue()
   })
 
   function setZeroValue() {
@@ -75,16 +89,35 @@
     await unstake.wait()
     setZeroValue()
   }
+
+  async function getPaxsetValue() {
+    const whiteholeContract = new ethers.Contract($WhiteholeContract, WhiteholeABI, provider)
+    const paxContract = new ethers.Contract($PaxContract, PaxABI, provider)
+    const paxsetTotalSupply = await whiteholeContract.totalSupply()
+    const whiteholePaxBalance = await paxContract.balanceOf($WhiteholeContract)
+    const paxsetTotalSupplyValue = ethers.utils.formatEther(paxsetTotalSupply)
+    const whiteholePaxBalanceValue = ethers.utils.formatEther(whiteholePaxBalance)
+    totalStakedPax = (whiteholePaxBalanceValue * 1).toFixed(4)
+    currentPaxsetValue = (paxsetTotalSupplyValue / whiteholePaxBalanceValue).toFixed(4)
+  }
 </script>
 
 <div class="container">
   <div class="container-title">White Hole</div>
   <div class="container-content">
     <div class="container-paragraph">
-      $PAX is a token used in the CxNxD ecosystem and is used to use the utility provided by CxNxD.
+      PAX is a token used in the CxNxD ecosystem and is used to use the utility provided by CxNxD.
     </div>
     <div class="logo-wrap">
       <img class="logo" src="/assets/paxset.png" alt="pax-logo" />
+    </div>
+    <div class="info-wrap">
+      <div class="info-text">
+        1 PAX = {currentPaxsetValue} PAXSET
+      </div>
+      <div class="info-text">
+        Total Staking: {totalStakedPax} PAX
+      </div>
     </div>
   </div>
 </div>
@@ -254,11 +287,25 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
   }
 
   .logo {
     width: 50%;
+  }
+
+  .info-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+  }
+
+  .info-text {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
   }
 
   input {
