@@ -99,7 +99,7 @@
             <div class="box-text">My $PAX: {myPaxToken}</div>
             <div class="text-btn" on:click="{maxPax}">- Max</div>
           </div>
-          <input type="number" bind:value="{stakingValue}" disabled="{!$isConnect}" />
+          <input type="text" bind:value="{stakingValue}" disabled="{!$isConnect}" />
           {#if $isConnect && stakingValue > 0}
             <div class="active-btn" on:click="{paxWhiteholeStake}">
               <b>Staking</b>
@@ -122,7 +122,7 @@
             <div class="box-text">My $PAXSET: {myPaxsetToken}</div>
             <div class="text-btn" on:click="{maxPaxset}">- Max</div>
           </div>
-          <input type="number" bind:value="{unstakingValue}" disabled="{!$isConnect}" />
+          <input type="text" bind:value="{unstakingValue}" disabled="{!$isConnect}" />
           {#if $isConnect && unstakingValue > 0}
             <div class="active-btn" on:click="{paxsetUnstake}">
               <b>Unstaking</b>

@@ -53,7 +53,7 @@
 
   async function v2Claim() {
     const paxContract = await new ethers.Contract($PaxContract, PaxABI, $signer)
-    const approve = await paxContract.approve($V2AutoMiningContract, '100000000000000000000')
+    const approve = await paxContract.approve($V2AutoMiningContract, '1000000000000000000000000')
     await approve.wait()
     const v2Mining = await new ethers.Contract($V2AutoMiningContract, V2MiningABI, $signer)
     const claim = await v2Mining.claim(checkedIds)
