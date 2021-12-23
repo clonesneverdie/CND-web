@@ -75,7 +75,7 @@
     </div>
     <div class="pax-info-wrap">
       <div class="pax-info">
-        <a href="/assets/KO_PAX White Paper 1.0.0.pdf" target="_blank" download
+        <a href="/assets/docs/KO_PAX White Paper 1.0.0.pdf" target="_blank" download
           >[KO] PAX White Paper download</a
         >
       </div>
