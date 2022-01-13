@@ -149,7 +149,7 @@
             <div class="box-text">My Dev Token: {myToken}</div>
             <div class="text-btn" on:click="{maxMyDevToken}">- Max</div>
           </div>
-          <input type="number" bind:value="{stakingValue}" disabled="{!$isConnect}" />
+          <input type="text" bind:value="{stakingValue}" disabled="{!$isConnect}" />
           {#if $isConnect && stakingValue > 0}
             <div class="active-btn" on:click="{devTokenStaking}">
               <b>Staking</b>
@@ -172,7 +172,7 @@
             <div class="box-text">My Staked Dev Token: {myStakedToken}</div>
             <div class="text-btn" on:click="{maxStakedDevToken}">- Max</div>
           </div>
-          <input type="number" bind:value="{unstakingValue}" disabled="{!$isConnect}" />
+          <input type="text" bind:value="{unstakingValue}" disabled="{!$isConnect}" />
           {#if $isConnect && unstakingValue > 0}
             <div class="active-btn" on:click="{devTokenUnstaking}">
               <b>Unstaking</b>
