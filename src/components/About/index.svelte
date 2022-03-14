@@ -1,11 +1,14 @@
 <script lang="ts">
+  import KlaytnContractList from '@/components/ContractList/klaytn.svelte'
   import ContractList from '@/components/ContractList/index.svelte'
 </script>
 
 <div class="container">
   <div class="container-title">About</div>
   <div class="container-content">
-    <div class="container-paragraph">There is information about CxNxD here. Check out about CxNxD!</div>
+    <div class="container-paragraph">CxNxD 프로젝트에 대한 정보입니다. 지금 정보를 확인하세요!</div>
+    <KlaytnContractList />
+    <br />
     <ContractList />
   </div>
 </div>

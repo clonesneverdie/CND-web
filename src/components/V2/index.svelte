@@ -2,7 +2,7 @@
 </script>
 
 <div class="container">
-  <div class="container-title">CxNxD 萬 (V2)</div>
+  <div class="container-title">CxNxD Mu(萬) (V2)</div>
   <div class="container-content">
     <!-- <div class="youtube-frame">
       <iframe
@@ -16,11 +16,11 @@
     <div class="sub-content">
       <img class="sample-img" src="/assets/v2-sample.jpg" alt="sample" />
       <div class="sub-content-box">
-        <div class="sub-content-title">About 'Clones Never Die 萬'</div>
+        <div class="sub-content-title">About 'Clones Never Die Mu'</div>
         <div class="sub-content-paragraph">
-          'Clones Never Die 萬' is version 2 of 'Clones Never Die'.
+          'Clones Never Die Mu' is version 2 of 'Clones Never Die'.
           <br />
-          'CxNxD 萬' exists on the polygon blockchain.
+          'CxNxD Mu' exists on the klaytn blockchain.
           <br />
           Each unique part was used to create 10,000 NFTs.
           <br />
@@ -30,8 +30,6 @@
           <br />
           If you have clones, you can use the clone picture wherever you want and do various activities in the Clones Never
           Die world.
-          <br />
-          And 'CxNxD 萬' can also earn $Nectar from Lotus!
         </div>
       </div>
     </div>
@@ -44,21 +42,18 @@
           </div>
         </div>
         <div class="info-box">
-          <div class="info-box-title">Lotus</div>
-          <div class="info-box-paragraph">This is where CxNxD clones work. Clones can earn $Nectar here.</div>
+          <div class="info-box-title">PFP</div>
+          <div class="info-box-paragraph">CxNxD Mu holders can use their clones as profile photos.</div>
         </div>
         <div class="info-box">
           <div class="info-box-title">$Nectar</div>
-          <div class="info-box-paragraph">
-            $Nectar is a token used in the CxNxD world. It can be used to vote on governance or mint V3, and we are
-            planning various other uses.
-          </div>
+          <div class="info-box-paragraph">$Nectar is a token used in the CxNxD world.</div>
         </div>
         <div class="info-box">
-          <div class="info-box-title">Governance</div>
+          <div class="info-box-title">Vote</div>
           <div class="info-box-paragraph">
-            CxNxD team operates governance to reflect the opinions of holders. $Nectar holders can voice out their
-            opinion and vote.
+            CxNxD team operates vote to reflect the opinions of holders. CxNxD Mu holders can vote on the
+            direction of the CxNxD project.
           </div>
         </div>
       </div>
@@ -66,9 +61,9 @@
     <div class="sub-content-r">
       <img class="sample-img" src="/assets/token-distribute.png" alt="distribute" />
       <div class="sub-content-box">
-        <div class="sub-content-title">Token distribution</div>
+        <div class="sub-content-title">NFT distribution</div>
         <div class="sub-content-paragraph">
-          CxNxD 萬 tokens are distributed as follows.
+          CxNxD Mu(萬) NFTs are distributed as follows.
           <br />
           <br />
           CxNxD Team: 500 Clones, (No. 0 ~ 499)
@@ -85,18 +80,18 @@
     <div class="sub-content">
       <div class="sub-content-box-center">
         Opensea Collection
-        <a class="sub-content-contract" href="https://opensea.io/collection/clones-never-die-v2" target="_blank"
-          >Clones Never Die 萬 (V2)</a
+        <a class="sub-content-contract" href="https://opensea.io/collection/clones-never-die-mu" target="_blank"
+          >Clones Never Die Mu (V2)</a
         >
       </div>
     </div>
     <div class="sub-content">
       <div class="sub-content-box-center">
-        CxNxD 萬 Contract Address
+        CxNxD Mu(萬) Contract Address
         <a
           class="sub-content-contract"
-          href="https://polygonscan.com/token/0x6c15030A0055D7350c89EbbD460EB4F145462Fbd"
-          target="_blank">0x6c15030A0055D7350c89EbbD460EB4F145462Fbd</a
+          href="https://scope.klaytn.com/nft/0x19FEb74A239fC7D6583d8C434A388880747E8dff"
+          target="_blank">0x19FEb74A239fC7D6583d8C434A388880747E8dff</a
         >
       </div>
     </div>

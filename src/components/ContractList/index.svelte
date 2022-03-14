@@ -60,7 +60,7 @@
 </script>
 
 <div class="content">
-  <div class="subtitle"><b>Contracts</b></div>
+  <div class="subtitle"><b>(구) Polygon Contracts</b></div>
   {#each contractListData as item}
     <div class="sub-content">
       <div class="sub-content-title">- {item.contractTitle}</div>

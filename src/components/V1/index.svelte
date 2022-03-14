@@ -2,20 +2,20 @@
 </script>
 
 <div class="container">
-  <div class="container-title">CxNxD K (V1)</div>
+  <div class="container-title">CxNxD Kings (V1)</div>
   <div class="container-content">
     <div class="sub-content">
       <img class="sample-img" src="/assets/v1.png" alt="sample" />
       <div class="sub-content-box">
-        <div class="sub-content-title">About 'Clones Never Die K'</div>
+        <div class="sub-content-title">About 'Clones Never Die Kings'</div>
         <div class="sub-content-paragraph">
           'Clones Never Die K' is version 1 of 'Clones Never Die'.
           <br />
-          'CxNxD K' exists on the polygon blockchain.
+          'CxNxD K' exists on the klaytn blockchain.
           <br />
           100 clones of the CxNxD Original Collection have been transferred to Polygon.
           <br />
-          And it was made with a collection called CxNxD K.
+          And it was made with a collection called Clones Never Die Kings.
           <br />
           Each clone is the king of the clone world and is named.
           <br />
@@ -26,18 +26,18 @@
     <div class="sub-content">
       <div class="sub-content-box-center">
         Opensea Collection
-        <a class="sub-content-contract" href="https://opensea.io/collection/clones-never-die-v1-" target="_blank"
-          >Clones Never Die K (V1)</a
+        <a class="sub-content-contract" href="https://opensea.io/collection/clones-never-die-kings" target="_blank"
+          >Clones Never Die Kings (V1)</a
         >
       </div>
     </div>
     <div class="sub-content">
       <div class="sub-content-box-center">
-        CxNxD K Contract Address
+        CxNxD Kings Contract Address
         <a
           class="sub-content-contract"
-          href="https://polygonscan.com/token/0x9f05782f940ae8fc2615ff5a30b90da41928bf8a"
-          target="_blank">0x9f05782f940ae8fc2615ff5a30b90da41928bf8a</a
+          href="https://scope.klaytn.com/nft/0x5893bfabee0f482f7b025171020cffe8ee9c0c66"
+          target="_blank">0x5893BfabeE0f482f7B025171020CfFe8EE9C0c66</a
         >
       </div>
     </div>
@@ -62,7 +62,6 @@
     margin-bottom: 20px;
   }
 
-  
   .sub-content-contract {
     font-size: 1rem;
     color: $highlight-color;
