@@ -39,7 +39,7 @@
       image: '/assets/pax-menu7.png',
       name: '$PAX Bridge',
       description: 'Use Chain Horizon to bridge my PAX to another blockchain!',
-      link: () => openInNewTab('https://pax.chainhorizon.org/')
+      link: () => openInNewTab('http://pax.gaiabridge.com/')
     },
     // {
     //   image: '/assets/event1.jpeg',
