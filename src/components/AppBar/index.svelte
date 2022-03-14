@@ -1,6 +1,6 @@
 <script lang="ts">
   import Fa from 'svelte-fa'
-  import { faTwitter, faDiscord, faMedium, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons'
+  import { faTwitter, faDiscord, faMedium, faYoutube } from '@fortawesome/free-brands-svg-icons'
   import { faBars } from '@fortawesome/free-solid-svg-icons'
 
   let navbarMenu = 'navbar_menu'
@@ -33,12 +33,11 @@
     <li><a href="https://twitter.com/clonesneverdie" target="_blank"><Fa icon="{faTwitter}" /></a></li>
     <li><a href="https://discord.gg/DNJ3sYCcGG" target="_blank"><Fa icon="{faDiscord}" /></a></li>
     <li><a href="https://medium.com/clones-never-die" target="_blank"><Fa icon="{faMedium}" /></a></li>
-    <li><a href="https://www.instagram.com/clones_never_d1e" target="_blank"><Fa icon="{faInstagram}" /></a></li>
     <li>
       <a href="https://www.youtube.com/channel/UCU5TsS3qQYO1c8AhgNe6v_g" target="_blank"><Fa icon="{faYoutube}" /></a>
     </li>
     <li>
-      <a href="https://opensea.io/collection/clones-never-die-v2" target="_blank"
+      <a href="https://opensea.io/collection/clones-never-die-mu" target="_blank"
         ><img class="opensea-logo" src="/assets/opensea-logo.png" alt="opensealogo" /></a
       >
     </li>

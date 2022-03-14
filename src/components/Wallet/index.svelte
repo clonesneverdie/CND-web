@@ -9,11 +9,10 @@
   <div class="container-title">CxNxD Wallet</div>
   <div class="container-content">
     <div class="container-paragraph">
-      It's a wallet where you can check your clones and $Nectar.
+      업데이트 준비중 입니다.
       <br />
-      Check it out now!
     </div>
-    <div class="sub-content">
+    <!-- <div class="sub-content">
       {#if $isConnect}
         <div class="connected">
           <b>
@@ -29,9 +28,9 @@
     <!-- <div class="sub-content">
       <NectarBalance />
     </div> -->
-    <div class="sub-content">
+    <!-- <div class="sub-content">
       <CNDV2Balance />
-    </div>
+    </div> -->
   </div>
 </div>
 
@@ -44,6 +43,7 @@
     min-height: 30vh;
     justify-content: space-between;
     align-items: flex-start;
+    height: 60vh;
   }
 
   .connected {
