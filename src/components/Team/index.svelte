@@ -24,13 +24,6 @@
       twitter: 'https://twitter.com/elixirevo'
     },
     {
-      memberImage: '/assets/M5.jpeg',
-      name: 'Solar | Editor',
-      description:
-        "Nice to meet you all. Do you want a taste of solarrrrbeam?",
-      twitter: 'https://twitter.com/solahdo'
-    },
-    {
       memberImage: '/assets/M3.jpeg',
       name: 'ARVITOR | Director',
       description:

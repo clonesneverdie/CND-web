@@ -21,7 +21,7 @@
 
 <style lang="scss">
   .team-member {
-    width: 20%;
+    width: 25%;
     padding: 6px;
     box-sizing: border-box;
   }
