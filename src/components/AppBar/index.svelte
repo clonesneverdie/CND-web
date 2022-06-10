@@ -20,10 +20,10 @@
   </div>
 
   <ul class="{toggleBtnActive === false ? 'navbar_menu' : 'navbar_menu_active'}">
-    <li><a href="https://chainshift.clonesneverdie.com" on:click="{clickedToggleBtn}">차원이동</a></li>
+    <li><a href="https://chainshift.clonesneverdie.com" target="_blank" on:click="{clickedToggleBtn}">차원이동</a></li>
     <!-- <li><a href="/#/mint" on:click="{clickedToggleBtn}">MINT</a></li> -->
     <li><a href="/#/wallet" on:click="{clickedToggleBtn}">지갑</a></li>
-    <li><a href="/#/vote" on:click="{clickedToggleBtn}">투표</a></li>
+    <li><a href="https://snapshot.org/#/clonesneverdie.eth" target="_blank" on:click="{clickedToggleBtn}">투표</a></li>
     <li><a href="/#/comics" on:click="{clickedToggleBtn}">만화</a></li>
     <li><a href="/#/pax" on:click="{clickedToggleBtn}">PAX</a></li>
     <li><a href="/#/about" on:click="{clickedToggleBtn}">ABOUT</a></li>
