@@ -11,17 +11,17 @@
       percent: '20%',
       img: '/assets/roadmap1.png',
       description:
-        'Lotus staking is activated. In addition, an exhibition of clones will begin at Sandbox. Please enjoy the game-like exhibition!'
+        'Lotus staking is activated. In addition, an exhibition of clones will begin at Sandbox. Please enjoy the game-like exhibition! (It was replaced by the Crypto Voxel Exhibition.)'
     },
     {
       percent: '40%',
       img: '/assets/roadmap2.png',
-      description: "History of the clones will be told in 10 comic. Only the holders will be able to watch it's comic!"
+      description: "History of the clones will be told in 10 comic. Only the holders will be able to watch it's comic! (It was replaced Nft game development.)"
     },
     {
       percent: '60%',
       img: '/assets/roadmap3.png',
-      description: "Clones' own fashion takes place in the metaverse"
+      description: "Clones' own fashion takes place in the metaverse. (It was replaced by fashion in the Nft game.)"
     },
     {
       percent: '80%',
