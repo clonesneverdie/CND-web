@@ -1,6 +1,6 @@
 <script lang="ts">
   import Fa from 'svelte-fa'
-  import { faTwitter, faDiscord, faMedium, faYoutube } from '@fortawesome/free-brands-svg-icons'
+  import { faTwitter, faDiscord, faMedium } from '@fortawesome/free-brands-svg-icons'
   import { faBars } from '@fortawesome/free-solid-svg-icons'
 
   let navbarMenu = 'navbar_menu'
@@ -22,7 +22,7 @@
   <ul class="{toggleBtnActive === false ? 'navbar_menu' : 'navbar_menu_active'}">
     <li><a href="https://chainshift.clonesneverdie.com" target="_blank" on:click="{clickedToggleBtn}">차원이동</a></li>
     <!-- <li><a href="/#/mint" on:click="{clickedToggleBtn}">MINT</a></li> -->
-    <li><a href="/#/wallet" on:click="{clickedToggleBtn}">지갑</a></li>
+    <!-- <li><a href="/#/wallet" on:click="{clickedToggleBtn}">지갑</a></li> -->
     <li><a href="https://snapshot.org/#/clonesneverdie.eth" target="_blank" on:click="{clickedToggleBtn}">투표</a></li>
     <li><a href="/#/comics" on:click="{clickedToggleBtn}">만화</a></li>
     <li><a href="/#/pax" on:click="{clickedToggleBtn}">PAX</a></li>
@@ -30,12 +30,9 @@
   </ul>
 
   <ul class="{toggleBtnActive === false ? 'navbar_icons' : 'navbar_icons_active'}">
-    <li><a href="https://twitter.com/clonesneverdie" target="_blank"><Fa icon="{faTwitter}" /></a></li>
-    <li><a href="https://discord.gg/DNJ3sYCcGG" target="_blank"><Fa icon="{faDiscord}" /></a></li>
+    <li><a href="https://twitter.com/clonecraftgame" target="_blank"><Fa icon="{faTwitter}" /></a></li>
+    <!-- <li><a href="https://discord.gg/DNJ3sYCcGG" target="_blank"><Fa icon="{faDiscord}" /></a></li> -->
     <li><a href="https://medium.com/clones-never-die" target="_blank"><Fa icon="{faMedium}" /></a></li>
-    <li>
-      <a href="https://www.youtube.com/channel/UCU5TsS3qQYO1c8AhgNe6v_g" target="_blank"><Fa icon="{faYoutube}" /></a>
-    </li>
     <li>
       <a href="https://opensea.io/collection/clones-never-die-mu" target="_blank"
         ><img class="opensea-logo" src="/assets/opensea-logo.png" alt="opensealogo" /></a
