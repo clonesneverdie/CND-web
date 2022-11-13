@@ -15,6 +15,11 @@
       contractTitle: 'CxNxD Mu (V2)',
       contractAddress: '0x19FEb74A239fC7D6583d8C434A388880747E8dff',
       polygonscanLink: `https://scope.klaytn.com/nft/0x19FEb74A239fC7D6583d8C434A388880747E8dff`
+    },
+    {
+      contractTitle: 'Nectar Token',
+      contractAddress: '0x39076d7a914017e04f6c0f67d88f4162625e8d1d',
+      polygonscanLink: `https://scope.klaytn.com/token/0x39076d7a914017e04f6c0f67d88f4162625e8d1d`
     }
   ]
 </script>
