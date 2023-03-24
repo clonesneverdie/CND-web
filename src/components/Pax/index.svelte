@@ -37,9 +37,9 @@
     },
     {
       image: '/assets/pax-menu7.png',
-      name: '$PAX Bridge',
+      name: '$PAX Bridge (현재 사용불가)',
       description: 'Use Chain Horizon to bridge my PAX to another blockchain!',
-      link: () => openInNewTab('http://pax.gaiabridge.com/')
+      link: () => openInNewTab('')
     },
     // {
     //   image: '/assets/event1.jpeg',
